@@ -52,7 +52,7 @@ public class HomeResource {
 		return "useradded";
 	}
 	
-	@GetMapping("/verif")
+	@GetMapping("/veriff")
 	@ResponseBody
 	public String  updateUser(@RequestBody User u) {
 		String a = userService.updateUser(u);
