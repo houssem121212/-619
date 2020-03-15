@@ -1,4 +1,4 @@
-package tn.esprit.spring.entity;
+package tn.esprit.spring.entities;
 
 import javax.persistence.*;
 
@@ -52,4 +52,13 @@ public class User {
     public void setRoles(String roles) {
         this.roles = roles;
     }
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", userName=" + userName + ", password=" + password + ", active=" + active
+				+ ", roles=" + roles + "]";
+	}
+    
+    
+    
 }

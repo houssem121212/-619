@@ -1,4 +1,4 @@
-package tn.esprit.spring.entity;
+package tn.esprit.spring.entities;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

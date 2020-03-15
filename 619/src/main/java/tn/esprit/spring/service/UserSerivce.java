@@ -2,7 +2,7 @@ package tn.esprit.spring.service;
 
 
 
-import tn.esprit.spring.entity.User;
+import tn.esprit.spring.entities.User;
 
 public interface UserSerivce {
 

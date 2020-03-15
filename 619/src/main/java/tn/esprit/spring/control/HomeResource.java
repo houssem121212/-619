@@ -3,18 +3,25 @@ package tn.esprit.spring.control;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import tn.esprit.spring.entity.User;
+import tn.esprit.spring.entities.User;
+import tn.esprit.spring.repository.UserRepository;
 import tn.esprit.spring.service.UserServiceImpl;
 
 @RestController
 public class HomeResource {
 
+	
+	@Autowired 
+	UserRepository userRepository;
 	
 	@Autowired
 	UserServiceImpl userService;
@@ -59,6 +66,17 @@ public class HomeResource {
 	
 		return a;
 	}
+	
+	@GetMapping(value = "/users/{loginName}") 
+	public ResponseEntity<User> findUserByLogin(@PathVariable("loginName") String login) { 
+	java.util.Optional<User> user  = userRepository.findByUserName(login); 
+	
+	System.out.println(user);
+if (user != null)
+	
+		return new ResponseEntity<User>(HttpStatus.FOUND); 
+else
+	return new ResponseEntity<User>(HttpStatus.NOT_FOUND); 		}
 	
 }
 
