@@ -17,7 +17,7 @@ public class Topic implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id_t;
+	private Long id_t;
 	
 	private String title;
 	

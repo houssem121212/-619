@@ -1,5 +1,6 @@
 package tn.esprit.spring.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -18,7 +19,7 @@ import com.sun.istack.NotNull;
 
 @Entity
 @Table(name = "Delivery")
-public class Delivery {
+public class Delivery implements Serializable{
 
 	
 	private static final long serialVersionUID = 1L;
@@ -28,29 +29,123 @@ public class Delivery {
 	@Column(name = "Delivery_Id")
 	private Long id;
 	
-	@NotNull
+	
     @Column(name = "delivery_price")
     private Double price;
 
 
-    @NotNull
+   
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "date")
     private Date date; 
     
-    @NotNull
+   
     @Column(name = "status")
     private String status;
 	
-    @NotNull
+   
     @Column(name = "description")
     private String description;
 
-    @OneToMany(mappedBy="DelveyCommand")
+    @OneToMany(mappedBy="delvey")
 	private List<Command> Commands;
 
     @ManyToOne
-	private User userDelivery;
+	private User user;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public List<Command> getCommands() {
+		return Commands;
+	}
+
+	public void setCommands(List<Command> commands) {
+		Commands = commands;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public Delivery(Long id, Double price, Date date, String status, String description, List<Command> commands,
+			User user) {
+		super();
+		this.id = id;
+		this.price = price;
+		this.date = date;
+		this.status = status;
+		this.description = description;
+		Commands = commands;
+		this.user = user;
+	}
+
+	public Delivery(Double price, Date date, String status, String description, List<Command> commands, User user) {
+		super();
+		this.price = price;
+		this.date = date;
+		this.status = status;
+		this.description = description;
+		Commands = commands;
+		this.user = user;
+	}
+
+	public Delivery() {
+		super();
+	}
+
+	@Override
+	public String toString() {
+		return "Delivery [id=" + id + ", price=" + price + ", date=" + date + ", status=" + status + ", description="
+				+ description + ", Commands=" + Commands + ", user=" + user + "]";
+	}
+    
+    
     
     
 }

@@ -17,7 +17,7 @@ public class Reply implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id_r;
+	private Long id_r;
 	private String content;
 
 	

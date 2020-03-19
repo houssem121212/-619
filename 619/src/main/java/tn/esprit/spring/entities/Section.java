@@ -12,7 +12,7 @@ public class Section implements Serializable{
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id_s; 
+	private Long id_s; 
 	private String name ; 
 	private String description ;
 

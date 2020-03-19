@@ -1,5 +1,6 @@
 package tn.esprit.spring.entities;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -9,27 +10,30 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.swing.text.StyleConstants.ColorConstants;
-
-import com.sun.istack.NotNull;
+import javax.persistence.OneToOne;
 
 @Entity
-public class Product {
+public class Product implements Serializable {
 
 	
-private static final long serialVersionUID = 1L;
+
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private long id;
+	private Long id;
 
 	private String reference;
 	
-	
+	@OneToOne
 	private Category category;
 	
-	private String productName;
+	private String name;
 	
 	private float price;
 	
@@ -39,30 +43,36 @@ private static final long serialVersionUID = 1L;
 		
 	private float weight ;
 	
-	private ColorConstants color;
+	private String color;
 	
-	private float discountAvailable;
+	private float discount;
 	
 	private String picture;
 	
 	private Brand brand;
 
 	
-	//@NotNull
-	@ManyToMany(mappedBy="produitCommands")
+	
+	@ManyToMany
 	private List<Command> commands;
 	
-	@ManyToMany(mappedBy="produitCart")
+	@ManyToMany(mappedBy="produits")
 	private List<Cart> carts;
 	
 	@ManyToOne
-	private Aisle aislesProduct;
+	private Aisle aisle;
 	
-	public long getId() {
+	@ManyToMany
+	private List<User> users;
+	
+	@ManyToMany(mappedBy="products")
+	private List<Stock> stocks;
+
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -82,12 +92,12 @@ private static final long serialVersionUID = 1L;
 		this.category = category;
 	}
 
-	public String getProductName() {
-		return productName;
+	public String getName() {
+		return name;
 	}
 
-	public void setProductName(String productName) {
-		this.productName = productName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public float getPrice() {
@@ -122,20 +132,20 @@ private static final long serialVersionUID = 1L;
 		this.weight = weight;
 	}
 
-	public ColorConstants getColor() {
+	public String getColor() {
 		return color;
 	}
 
-	public void setColor(ColorConstants color) {
+	public void setColor(String color) {
 		this.color = color;
 	}
 
-	public float getDiscountAvailable() {
-		return discountAvailable;
+	public float getDiscount() {
+		return discount;
 	}
 
-	public void setDiscountAvailable(float discountAvailable) {
-		this.discountAvailable = discountAvailable;
+	public void setDiscount(float discount) {
+		this.discount = discount;
 	}
 
 	public String getPicture() {
@@ -170,71 +180,66 @@ private static final long serialVersionUID = 1L;
 		this.carts = carts;
 	}
 
-	public Aisle getAislesProduct() {
-		return aislesProduct;
+	public Aisle getAisle() {
+		return aisle;
 	}
 
-	public void setAislesProduct(Aisle aislesProduct) {
-		this.aislesProduct = aislesProduct;
+	public void setAisle(Aisle aisle) {
+		this.aisle = aisle;
+	}
+
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
+
+	public List<Stock> getStocks() {
+		return stocks;
+	}
+
+	public void setStocks(List<Stock> stocks) {
+		this.stocks = stocks;
 	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
-	public Product(long id, String reference, Category category, String productName, float price, Size size,
-			String dimention, float weight, ColorConstants color, float discountAvailable, String picture, Brand brand,
-			List<Command> commands, List<Cart> carts, Aisle aislesProduct) {
+	public Product(Long id, String reference, Category category, String name, float price, Size size, String dimention,
+			float weight, String color, float discount, String picture, Brand brand, List<Command> commands,
+			List<Cart> carts, Aisle aisle, List<User> users, List<Stock> stocks) {
 		super();
 		this.id = id;
 		this.reference = reference;
 		this.category = category;
-		this.productName = productName;
+		this.name = name;
 		this.price = price;
 		this.size = size;
 		this.dimention = dimention;
 		this.weight = weight;
 		this.color = color;
-		this.discountAvailable = discountAvailable;
+		this.discount = discount;
 		this.picture = picture;
 		this.brand = brand;
 		this.commands = commands;
 		this.carts = carts;
-		this.aislesProduct = aislesProduct;
-	}
-
-	public Product(String reference, Category category, String productName, float price, Size size, String dimention,
-			float weight, ColorConstants color, float discountAvailable, String picture, Brand brand,
-			List<Command> commands, List<Cart> carts, Aisle aislesProduct) {
-		super();
-		this.reference = reference;
-		this.category = category;
-		this.productName = productName;
-		this.price = price;
-		this.size = size;
-		this.dimention = dimention;
-		this.weight = weight;
-		this.color = color;
-		this.discountAvailable = discountAvailable;
-		this.picture = picture;
-		this.brand = brand;
-		this.commands = commands;
-		this.carts = carts;
-		this.aislesProduct = aislesProduct;
+		this.aisle = aisle;
+		this.users = users;
+		this.stocks = stocks;
 	}
 
 	public Product() {
 		super();
 	}
-
-	@Override
-	public String toString() {
-		return "Product [id=" + id + ", reference=" + reference + ", category=" + category + ", productName="
-				+ productName + ", price=" + price + ", size=" + size + ", dimention=" + dimention + ", weight="
-				+ weight + ", color=" + color + ", discountAvailable=" + discountAvailable + ", picture=" + picture
-				+ ", brand=" + brand + ", commands=" + commands + ", carts=" + carts + ", aislesProduct="
-				+ aislesProduct + "]";
-	}
+	
+	
+	
+	
+	
+	
 	
 
 }

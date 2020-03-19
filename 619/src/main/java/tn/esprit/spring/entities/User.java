@@ -17,69 +17,197 @@ public class User {
     private String roles;
 
     
-    @OneToMany(mappedBy="userCommand")
+    @OneToMany(mappedBy="user")
 	private List<Command> Commands;
     
-    @OneToMany(mappedBy="userDelivery")
-	private List<Command> deliverys;
+    @OneToMany(mappedBy="user")
+	private List<Delivery> deliverys;
     
-    @OneToOne
-	private Aisle aisles;
+    @OneToMany(mappedBy="user")
+	private List<Don> dons;
+    
+    @OneToOne(mappedBy="user")
+	private Aisle aisle;
+    
+    @ManyToMany(mappedBy="users")
+	private List<Event> events;
 
     @ManyToOne
 	private Stock stocks;
     
-    @OneToOne(mappedBy="usersAdd")
-	private List<Add> adds;
+    @OneToOne
+	private Cart cart;
     
-    public int getId() {
-        return id;
-    }
+    @OneToOne(mappedBy="user")
+	private Ads ads;
+    
+    @ManyToMany(mappedBy="users")
+	private List<Product> products;
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public String getUserName() {
-        return userName;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
+	public String getUserName() {
+		return userName;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public boolean isActive() {
-        return active;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public void setActive(boolean active) {
-        this.active = active;
-    }
+	public boolean isActive() {
+		return active;
+	}
 
-    public String getRoles() {
-        return roles;
-    }
+	public void setActive(boolean active) {
+		this.active = active;
+	}
 
-    public void setRoles(String roles) {
-        this.roles = roles;
-    }
+	public String getRoles() {
+		return roles;
+	}
+
+	public void setRoles(String roles) {
+		this.roles = roles;
+	}
+
+	public List<Command> getCommands() {
+		return Commands;
+	}
+
+	public void setCommands(List<Command> commands) {
+		Commands = commands;
+	}
+
+	public List<Delivery> getDeliverys() {
+		return deliverys;
+	}
+
+	public void setDeliverys(List<Delivery> deliverys) {
+		this.deliverys = deliverys;
+	}
+
+	public List<Don> getDons() {
+		return dons;
+	}
+
+	public void setDons(List<Don> dons) {
+		this.dons = dons;
+	}
+
+	public Aisle getAisle() {
+		return aisle;
+	}
+
+	public void setAisle(Aisle aisle) {
+		this.aisle = aisle;
+	}
+
+	public List<Event> getEvents() {
+		return events;
+	}
+
+	public void setEvents(List<Event> events) {
+		this.events = events;
+	}
+
+	public Stock getStocks() {
+		return stocks;
+	}
+
+	public void setStocks(Stock stocks) {
+		this.stocks = stocks;
+	}
+
+	public Cart getCart() {
+		return cart;
+	}
+
+	public void setCart(Cart cart) {
+		this.cart = cart;
+	}
+
+	public Ads getAds() {
+		return ads;
+	}
+
+	public void setAds(Ads ads) {
+		this.ads = ads;
+	}
+
+	public List<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(List<Product> products) {
+		this.products = products;
+	}
+
+	public User(int id, String userName, String password, boolean active, String roles, List<Command> commands,
+			List<Delivery> deliverys, List<Don> dons, Aisle aisle, List<Event> events, Stock stocks, Cart cart, Ads ads,
+			List<Product> products) {
+		super();
+		this.id = id;
+		this.userName = userName;
+		this.password = password;
+		this.active = active;
+		this.roles = roles;
+		Commands = commands;
+		this.deliverys = deliverys;
+		this.dons = dons;
+		this.aisle = aisle;
+		this.events = events;
+		this.stocks = stocks;
+		this.cart = cart;
+		this.ads = ads;
+		this.products = products;
+	}
+
+	public User(String userName, String password, boolean active, String roles, List<Command> commands,
+			List<Delivery> deliverys, List<Don> dons, Aisle aisle, List<Event> events, Stock stocks, Cart cart, Ads ads,
+			List<Product> products) {
+		super();
+		this.userName = userName;
+		this.password = password;
+		this.active = active;
+		this.roles = roles;
+		Commands = commands;
+		this.deliverys = deliverys;
+		this.dons = dons;
+		this.aisle = aisle;
+		this.events = events;
+		this.stocks = stocks;
+		this.cart = cart;
+		this.ads = ads;
+		this.products = products;
+	}
+
+	public User() {
+		super();
+	}
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", userName=" + userName + ", password=" + password + ", active=" + active
-				+ ", roles=" + roles + "]";
+		return "User [id=" + id + ", userName=" + userName + ", active=" + active + ", roles=" + roles + ", Commands="
+				+ Commands + ", deliverys=" + deliverys + ", dons=" + dons + ", aisle=" + aisle + ", events=" + events
+				+ ", stocks=" + stocks + ", cart=" + cart + ", ads=" + ads + ", products=" + products + "]";
 	}
+
     
-    
-    //first commit karim
 	
-	//test
+    
+   
 }
