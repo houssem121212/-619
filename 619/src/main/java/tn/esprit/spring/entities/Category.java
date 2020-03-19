@@ -17,10 +17,10 @@ public class Category {
 	private long id;
 
 	@Column(name = "CategoryName")
-	private Category categoryName;
+	private String categoryName;
 	
 	@Column(name = "categoryDescription")
-	private Category categoryDescription;
+	private String categoryDescription;
 	
 	
 }

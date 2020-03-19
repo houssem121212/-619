@@ -23,8 +23,8 @@ public class Stock {
 	
 	private String categorie;
 	
-	@OneToMany(mappedBy="UserStock")
-	private List<User> users;
+//	@OneToMany(mappedBy="UserStock")
+//	private List<User> users;
 	
 	
 	
