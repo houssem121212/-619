@@ -21,7 +21,7 @@ public class User {
 	private List<Command> Commands;
     
     @OneToMany(mappedBy="userDelivery")
-	private List<Command> deliverys;
+	private List<Delivery> deliverys;
     
     @OneToOne
 	private Aisle aisles;
@@ -29,8 +29,8 @@ public class User {
     @ManyToOne
 	private Stock stocks;
     
-    @OneToOne(mappedBy="usersAdd")
-	private List<Add> adds;
+    @OneToOne(mappedBy="user")
+	private Ads adds;
     
     public int getId() {
         return id;

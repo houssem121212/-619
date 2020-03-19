@@ -17,13 +17,13 @@ public class Stock {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private long id;
+	private Long id;
 	
 	private Long capacite;
 	
 	private String categorie;
 	
-	@OneToMany(mappedBy="UserStock")
+	@OneToMany(mappedBy="stocks")
 	private List<User> users;
 	
 	

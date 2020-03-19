@@ -14,27 +14,28 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-public class Add {
+public class Ads {
 
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private long id;
+	private Long id;
 
-	@Column(name = "addCategorie")
-	private CategorieAisle addCategorie;
+	@OneToOne
+	private Category categorie;
 	
-	@Column(name = "addDescription")
-	private CategorieAisle addDescription;
 	
-	@Column(name = "addFile")
-	private CategorieAisle addFile;
+	private String description;
+	
+	private String typeFile;
+	
+	private String file;
 	
 	@Temporal(TemporalType.DATE)
-	private Date addDate;
+	private Date date;
 	
 	@OneToOne
-	private User usersAdd;
+	private User user;
 	
 }

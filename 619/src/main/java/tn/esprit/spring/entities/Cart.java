@@ -17,7 +17,7 @@ public class Cart {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_Cart")
-	private long id_Cart;
+	private Long id_Cart;
 	
 	
 	@ManyToMany
