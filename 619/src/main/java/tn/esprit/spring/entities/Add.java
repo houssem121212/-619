@@ -1,39 +1,40 @@
 package tn.esprit.spring.entities;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-public class Facture {
-	
-	private static final long serialVersionUID = 1L;
+public class Add {
 
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "factureId")
-	private long factureId;
+	@Column(name = "id")
+	private long id;
 
-	@Column(name = "factureNumero")
-	private Long factureNumero;
-
-	@Column(name = "facturePrice")
-	private float facturePrice;
-
+	@Column(name = "addCategorie")
+	private CategorieAisle addCategorie;
+	
+	@Column(name = "addDescription")
+	private CategorieAisle addDescription;
+	
+	@Column(name = "addFile")
+	private CategorieAisle addFile;
+	
 	@Temporal(TemporalType.DATE)
-	private Date factureDate;
-
-	@Column(name = "factureTVA")
-	private float factureTVA;
+	private Date addDate;
 	
 	@OneToOne
-	private Command commands;
-
+	private User usersAdd;
+	
 }

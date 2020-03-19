@@ -1,5 +1,7 @@
 package tn.esprit.spring.entities;
 
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
@@ -14,6 +16,22 @@ public class User {
     private boolean active;
     private String roles;
 
+    
+    @OneToMany(mappedBy="userCommand")
+	private List<Command> Commands;
+    
+    @OneToMany(mappedBy="userDelivery")
+	private List<Command> deliverys;
+    
+    @OneToOne
+	private Aisle aisles;
+
+    @ManyToOne
+	private Stock stocks;
+    
+    @OneToOne(mappedBy="usersAdd")
+	private List<Add> adds;
+    
     public int getId() {
         return id;
     }
