@@ -29,6 +29,7 @@ public class Ads {
 	private String description;
 	
 	private String typeFile;
+	 
 	
 	private String file;
 	
