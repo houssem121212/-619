@@ -31,6 +31,7 @@ public class Ads {
 	private String typeFile;
 	 
 	
+	
 	private String file;
 	
 	@Temporal(TemporalType.DATE)
