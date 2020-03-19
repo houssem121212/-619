@@ -43,7 +43,16 @@ public class User {
     
     @ManyToMany(mappedBy="users")
 	private List<Product> products;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="user")
+    private List<Comment> comments ;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="user")
+    private List<Topic> topics ;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="user")
+    private List<Reply> replies ;
+    
 	public int getId() {
 		return id;
 	}
@@ -155,10 +164,36 @@ public class User {
 	public void setProducts(List<Product> products) {
 		this.products = products;
 	}
+	
+	
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+
+	public List<Topic> getTopics() {
+		return topics;
+	}
+
+	public void setTopics(List<Topic> topics) {
+		this.topics = topics;
+	}
+
+	public List<Reply> getReplies() {
+		return replies;
+	}
+
+	public void setReplies(List<Reply> replies) {
+		this.replies = replies;
+	}
 
 	public User(int id, String userName, String password, boolean active, String roles, List<Command> commands,
 			List<Delivery> deliverys, List<Don> dons, Aisle aisle, List<Event> events, Stock stocks, Cart cart, Ads ads,
-			List<Product> products) {
+			List<Product> products,List<Comment> comments,List<Topic> topics ,List<Reply> replies ) {
 		super();
 		this.id = id;
 		this.userName = userName;
@@ -174,11 +209,14 @@ public class User {
 		this.cart = cart;
 		this.ads = ads;
 		this.products = products;
+		this.comments = comments ;
+		this.topics=topics;
+		this.replies = replies ;
 	}
 
 	public User(String userName, String password, boolean active, String roles, List<Command> commands,
 			List<Delivery> deliverys, List<Don> dons, Aisle aisle, List<Event> events, Stock stocks, Cart cart, Ads ads,
-			List<Product> products) {
+			List<Product> products,List<Comment> comments,List<Topic> topics ,List<Reply> replies) {
 		super();
 		this.userName = userName;
 		this.password = password;
@@ -193,6 +231,9 @@ public class User {
 		this.cart = cart;
 		this.ads = ads;
 		this.products = products;
+		this.comments = comments ;
+		this.topics=topics;
+		this.replies = replies ;
 	}
 
 	public User() {
@@ -203,7 +244,8 @@ public class User {
 	public String toString() {
 		return "User [id=" + id + ", userName=" + userName + ", active=" + active + ", roles=" + roles + ", Commands="
 				+ Commands + ", deliverys=" + deliverys + ", dons=" + dons + ", aisle=" + aisle + ", events=" + events
-				+ ", stocks=" + stocks + ", cart=" + cart + ", ads=" + ads + ", products=" + products + "]";
+				+ ", stocks=" + stocks + ", cart=" + cart + ", ads=" + ads + ", products=" + products  + ", comments=" + comments
+				 + ", topics=" + topics  + ", replies=" + replies + "]";
 	}
 
     
