@@ -32,9 +32,7 @@ import tn.esprit.spring.repository.RoleRepository;
 import tn.esprit.spring.repository.UserRepository;
 import tn.esprit.spring.security.JwtTokenProvider;
 
-/**
- * Created by rajeevkumarsingh on 02/08/17.
- */
+
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
