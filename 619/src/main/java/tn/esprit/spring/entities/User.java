@@ -150,6 +150,36 @@ public class User  {
       
       @ManyToMany(mappedBy="users")
   	private List<Product> products;
+
+	public User(Long id, @NotBlank @Size(max = 40) String name, @NotBlank @Size(max = 15) String username,
+			@NotBlank @Size(max = 40) @Email String email, @NotBlank @Size(max = 100) String password, Set<Role> roles,
+			List<Command> commands, List<Delivery> deliverys, List<Don> dons, Aisle aisle, List<Event> events,
+			Stock stocks, Cart cart, Ads ads, List<Product> products) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.roles = roles;
+		Commands = commands;
+		this.deliverys = deliverys;
+		this.dons = dons;
+		this.aisle = aisle;
+		this.events = events;
+		this.stocks = stocks;
+		this.cart = cart;
+		this.ads = ads;
+		this.products = products;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", username=" + username + ", email=" + email + ", password="
+				+ password + ", roles=" + roles + ", Commands=" + Commands + ", deliverys=" + deliverys + ", dons="
+				+ dons + ", aisle=" + aisle + ", events=" + events + ", stocks=" + stocks + ", cart=" + cart + ", ads="
+				+ ads + ", products=" + products + "]";
+	}
       
     
 
