@@ -68,7 +68,7 @@ public class ChatMessage implements Serializable {
 	public ChatMessage() {
 		super();
 	}
-
+//test
 	@Override
 	public String toString() {
 		return "ChatMessage [id=" + id + ", type=" + type + ", Content=" + Content + ", Sender=" + Sender + "]";
