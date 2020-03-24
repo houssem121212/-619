@@ -47,7 +47,7 @@ public class Delivery implements Serializable{
     @Column(name = "description")
     private String description;
 
-    @OneToMany(mappedBy="Delivery")
+    @OneToMany(mappedBy="delvey")
 	private List<Command> Commands;
 
     @ManyToOne
