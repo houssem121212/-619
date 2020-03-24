@@ -276,9 +276,75 @@ public class User  {
 	public List<Product> getProducts() {
 		return products;
 	}
+	
+	    
+    
 
 	public void setProducts(List<Product> products) {
 		this.products = products;
+	}
+	
+	@OneToMany( mappedBy="user")
+    private List<Comment> comments ;
+
+    @OneToMany( mappedBy="user")
+    private List<Topic> topics ;
+
+    @OneToMany( mappedBy="user")
+    private List<Reply> replies ;
+    
+    
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+
+	public List<Topic> getTopics() {
+		return topics;
+	}
+
+	public void setTopics(List<Topic> topics) {
+		this.topics = topics;
+	}
+
+	public List<Reply> getReplies() {
+		return replies;
+	}
+
+	public void setReplies(List<Reply> replies) {
+		this.replies = replies;
+	}
+
+	
+	public User(Long id, int salary, @NotBlank @Size(max = 40) String name, @NotBlank @Size(max = 15) String username,
+			@NotBlank @Size(max = 40) @Email String email, @NotBlank @Size(max = 100) String password, Set<Role> roles,
+			List<Command> commands, List<Delivery> deliverys, List<Don> dons, Aisle aisle, List<Event> events,
+			Stock stocks, Cart cart, Ads ads, List<Product> products, List<Comment> comments, List<Topic> topics,
+			List<Reply> replies) {
+		super();
+		this.id = id;
+		this.salary = salary;
+		this.name = name;
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.roles = roles;
+		Commands = commands;
+		this.deliverys = deliverys;
+		this.dons = dons;
+		this.aisle = aisle;
+		this.events = events;
+		this.stocks = stocks;
+		this.cart = cart;
+		this.ads = ads;
+		this.products = products;
+		this.comments = comments;
+		this.topics = topics;
+		this.replies = replies;
 	}
 
 	@Override
@@ -286,8 +352,11 @@ public class User  {
 		return "User [id=" + id + ", salary=" + salary + ", name=" + name + ", username=" + username + ", email="
 				+ email + ", password=" + password + ", roles=" + roles + ", Commands=" + Commands + ", deliverys="
 				+ deliverys + ", dons=" + dons + ", aisle=" + aisle + ", events=" + events + ", stocks=" + stocks
-				+ ", cart=" + cart + ", ads=" + ads + ", products=" + products + "]";
+				+ ", cart=" + cart + ", ads=" + ads + ", products=" + products + ", comments=" + comments + ", topics="
+				+ topics + ", replies=" + replies + "]";
 	}
+
+	
 
 
       
