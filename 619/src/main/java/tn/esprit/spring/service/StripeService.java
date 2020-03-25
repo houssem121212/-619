@@ -34,7 +34,7 @@ import tn.esprit.spring.repository.CartRepository;
 import tn.esprit.spring.repository.productRepository;
 
 @Service
-public class StripeService {
+public class StripeService implements IStripeService {
 
 	@Autowired
     CartRepository cartRepository;
