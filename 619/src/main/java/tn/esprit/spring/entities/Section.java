@@ -15,7 +15,7 @@ public class Section implements Serializable{
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id_s; 
+	private Long id_s; 
 	private String name ; 
 	private String description ;
 	private String image_s ;
@@ -23,10 +23,10 @@ public class Section implements Serializable{
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="section")
     private List<Topic> topics ;
 	
-	public long getId_s() {
+	public Long getId_s() {
 		return id_s;
 	}
-	public void setId_s(long id_s) {
+	public void setId_s(Long id_s) {
 		this.id_s = id_s;
 	}
 	public String getName() {
@@ -53,7 +53,7 @@ public class Section implements Serializable{
 	public void setTopics(List<Topic> topics) {
 		this.topics = topics;
 	}
-	public Section(long id_s, String name, String description, String image_s, List<Topic> topics) {
+	public Section(Long id_s, String name, String description, String image_s, List<Topic> topics) {
 		super();
 		this.id_s = id_s;
 		this.name = name;
