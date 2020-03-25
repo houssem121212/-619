@@ -37,7 +37,7 @@ public class Product implements Serializable {
 	
 	private float price;
 	
-	private Size size;
+	private String size;
 	
 	private String dimention;
 		
@@ -49,7 +49,9 @@ public class Product implements Serializable {
 	
 	private String picture;
 	
-	private Brand brand;
+	private String brand;
+	
+	private int quantiteCart;
 
 	
 	
@@ -74,6 +76,17 @@ public class Product implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	
+	
+	
+	public int getQuantiteCart() {
+		return quantiteCart;
+	}
+
+	public void setQuantiteCart(int quantiteCart) {
+		this.quantiteCart = quantiteCart;
 	}
 
 	public String getReference() {
@@ -108,11 +121,11 @@ public class Product implements Serializable {
 		this.price = price;
 	}
 
-	public Size getSize() {
+	public String getSize() {
 		return size;
 	}
 
-	public void setSize(Size size) {
+	public void setSize(String size) {
 		this.size = size;
 	}
 
@@ -156,11 +169,11 @@ public class Product implements Serializable {
 		this.picture = picture;
 	}
 
-	public Brand getBrand() {
+	public String getBrand() {
 		return brand;
 	}
 
-	public void setBrand(Brand brand) {
+	public void setBrand(String brand) {
 		this.brand = brand;
 	}
 
@@ -208,9 +221,12 @@ public class Product implements Serializable {
 		return serialVersionUID;
 	}
 
-	public Product(Long id, String reference, Category category, String name, float price, Size size, String dimention,
-			float weight, String color, float discount, String picture, Brand brand, List<Command> commands,
-			List<Cart> carts, Aisle aisle, List<User> users, List<Stock> stocks) {
+	
+
+	public Product(Long id, String reference, Category category, String name, float price, String size,
+			String dimention, float weight, String color, float discount, String picture, String brand,
+			int quantiteCart, List<Command> commands, List<Cart> carts, Aisle aisle, List<User> users,
+			List<Stock> stocks) {
 		super();
 		this.id = id;
 		this.reference = reference;
@@ -224,6 +240,7 @@ public class Product implements Serializable {
 		this.discount = discount;
 		this.picture = picture;
 		this.brand = brand;
+		this.quantiteCart = quantiteCart;
 		this.commands = commands;
 		this.carts = carts;
 		this.aisle = aisle;
@@ -233,6 +250,38 @@ public class Product implements Serializable {
 
 	public Product() {
 		super();
+	}
+
+	public Product(String reference, Category category, String name, float price, String size, String dimention,
+			float weight, String color, float discount, String picture, String brand, int quantiteCart,
+			List<Command> commands, List<Cart> carts, Aisle aisle, List<User> users, List<Stock> stocks) {
+		super();
+		this.reference = reference;
+		this.category = category;
+		this.name = name;
+		this.price = price;
+		this.size = size;
+		this.dimention = dimention;
+		this.weight = weight;
+		this.color = color;
+		this.discount = discount;
+		this.picture = picture;
+		this.brand = brand;
+		this.quantiteCart = quantiteCart;
+		this.commands = commands;
+		this.carts = carts;
+		this.aisle = aisle;
+		this.users = users;
+		this.stocks = stocks;
+	}
+
+	@Override
+	public String toString() {
+		return "Product [id=" + id + ", reference=" + reference + ", category=" + category + ", name=" + name
+				+ ", price=" + price + ", size=" + size + ", dimention=" + dimention + ", weight=" + weight + ", color="
+				+ color + ", discount=" + discount + ", picture=" + picture + ", brand=" + brand + ", quantiteCart="
+				+ quantiteCart + ", commands=" + commands + ", carts=" + carts + ", aisle=" + aisle + ", users=" + users
+				+ ", stocks=" + stocks + "]";
 	}
 	
 	
