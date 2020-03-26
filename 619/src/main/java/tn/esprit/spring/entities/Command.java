@@ -1,11 +1,14 @@
 package tn.esprit.spring.entities;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,44 +18,55 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 
 @Entity
 public class Command implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long id;
 
-	@Column(name = "commandType")
-	private TypeCommand commandType;
+	@Column(name = "numeroCommand")
+	private int numeroCommand;
+
+	@Column
+	private String commandType;
+
+	@Column
+	private float prix;
 	
-	@Temporal(TemporalType.DATE)
-	private Date commandDate;
-	
+	@Column
+	private LocalDate commandDate;
+
 	@Column(name = "commandAdresse")
 	private String commandAdresse;
 
-	
 	@Column(name = "commandEtat")
 	private Boolean commandEtat;
-	
 
-	@ManyToMany(mappedBy="commands")
+	@JsonIgnore
+	@ManyToMany(mappedBy = "commands")
 	private List<Product> produits;
-	
+
+	@JsonIgnore
 	@OneToOne
 	private Facture facture;
+
 	
+	@JsonIgnore
 	@ManyToOne
 	private User user;
 
+	@JsonIgnore
 	@ManyToOne
 	private Delivery delvey;
 	
+	@JsonIgnore
 	@ManyToOne
 	private Don don;
 
@@ -72,19 +86,22 @@ public class Command implements Serializable {
 		this.id = id;
 	}
 
-	public TypeCommand getCommandType() {
+	
+	
+
+	public String getCommandType() {
 		return commandType;
 	}
 
-	public void setCommandType(TypeCommand commandType) {
+	public void setCommandType(String commandType) {
 		this.commandType = commandType;
 	}
 
-	public Date getCommandDate() {
+	public LocalDate getCommandDate() {
 		return commandDate;
 	}
 
-	public void setCommandDate(Date commandDate) {
+	public void setCommandDate(LocalDate commandDate) {
 		this.commandDate = commandDate;
 	}
 
@@ -140,44 +157,81 @@ public class Command implements Serializable {
 		return serialVersionUID;
 	}
 
-	public Command(Long id, TypeCommand commandType, Date commandDate, String commandAdresse, Boolean commandEtat,
-			List<Product> produits, Facture facture, User user, Delivery delvey) {
-		super();
-		this.id = id;
-		this.commandType = commandType;
-		this.commandDate = commandDate;
-		this.commandAdresse = commandAdresse;
-		this.commandEtat = commandEtat;
-		this.produits = produits;
-		this.facture = facture;
-		this.user = user;
-		this.delvey = delvey;
-	}
-
-	public Command(TypeCommand commandType, Date commandDate, String commandAdresse, Boolean commandEtat,
-			List<Product> produits, Facture facture, User user, Delivery delvey) {
-		super();
-		this.commandType = commandType;
-		this.commandDate = commandDate;
-		this.commandAdresse = commandAdresse;
-		this.commandEtat = commandEtat;
-		this.produits = produits;
-		this.facture = facture;
-		this.user = user;
-		this.delvey = delvey;
-	}
-
 	public Command() {
 		super();
 	}
 
+	public int getNumeroCommand() {
+		return numeroCommand;
+	}
+
+	public void setNumeroCommand(int numeroCommand) {
+		this.numeroCommand = numeroCommand;
+	}
+
+
+	public float getPrix() {
+		return prix;
+	}
+
+	public void setPrix(float prix) {
+		this.prix = prix;
+	}
+
+	public Command(Long id, int numeroCommand, String commandType, float prix, LocalDate commandDate,
+			String commandAdresse, Boolean commandEtat, List<Product> produits, Facture facture, User user,
+			Delivery delvey, Don don) {
+		super();
+		this.id = id;
+		this.numeroCommand = numeroCommand;
+		this.commandType = commandType;
+		this.prix = prix;
+		this.commandDate = commandDate;
+		this.commandAdresse = commandAdresse;
+		this.commandEtat = commandEtat;
+		this.produits = produits;
+		this.facture = facture;
+		this.user = user;
+		this.delvey = delvey;
+		this.don = don;
+	}
+
+	public Command(int numeroCommand, String commandType, float prix, LocalDate commandDate, String commandAdresse,
+			Boolean commandEtat, List<Product> produits, Facture facture, User user, Delivery delvey, Don don) {
+		super();
+		this.numeroCommand = numeroCommand;
+		this.commandType = commandType;
+		this.prix = prix;
+		this.commandDate = commandDate;
+		this.commandAdresse = commandAdresse;
+		this.commandEtat = commandEtat;
+		this.produits = produits;
+		this.facture = facture;
+		this.user = user;
+		this.delvey = delvey;
+		this.don = don;
+	}
+
 	@Override
 	public String toString() {
-		return "Command [id=" + id + ", commandType=" + commandType + ", commandDate=" + commandDate
-				+ ", commandAdresse=" + commandAdresse + ", commandEtat=" + commandEtat + ", produits=" + produits
-				+ ", facture=" + facture + ", user=" + user + ", delvey=" + delvey + "]";
+		return "Command [id=" + id + ", numeroCommand=" + numeroCommand + ", commandType=" + commandType + ", prix="
+				+ prix + ", commandDate=" + commandDate + ", commandAdresse=" + commandAdresse + ", commandEtat="
+				+ commandEtat + ", produits=" + produits + ", facture=" + facture + ", user=" + user + ", delvey="
+				+ delvey + ", don=" + don + "]";
 	}
+
 	
+
+
+
+	
+
+	
+
+	
+
+	
+
 	
 	
 	

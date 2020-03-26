@@ -37,11 +37,11 @@ import tn.esprit.spring.repository.productRepository;
 public class StripeService implements IStripeService {
 
 	@Autowired
-    CartRepository cartRepository;
-	
+	CartRepository cartRepository;
+
 	@Autowired
 	productRepository productRepository;
-	
+
 	@Value("${STRIPE_SECRET_KEY}")
 	private String secretKey;
 
@@ -130,40 +130,37 @@ public class StripeService implements IStripeService {
 		return charge.getAmount();
 	}
 
-	
-	//list des produit dans la carte
-	
+	// list des produit dans la carte
+
 	public String stripe(Model model) {
-			List<Product> productList = (List<Product>) productRepository.findAll();
-			List<Cart> cartItemList = (List<Cart>) cartRepository.findAll();
+		List<Product> productList = (List<Product>) productRepository.findAll();
+		List<Cart> cartItemList = (List<Cart>) cartRepository.findAll();
 
-			float total = 0 ;
+		float total = 0;
 
-			for (Cart item : cartItemList) {
-				total = total+item.getTotal();
-			}
-
-			model.addAttribute("productList", productList);
-			model.addAttribute("cartItemList", cartItemList);
-			model.addAttribute("total", total);
-
-			return "stripe-cart";
+		for (Cart item : cartItemList) {
+			total = total + item.getTotal();
 		}
-	
-	//add product to the cart
-	
-	
-	/*public String addToCart(String name) {
-		Product product = productRepository.findOne(name);
 
-		CartItem cartItem = new CartItem();
-		cartItem.setProduct(product);
-		cartItem.setQty(1);
-		cartItem.setSubTotal(new BigDecimal(product.getPrice()).setScale(2, BigDecimal.ROUND_HALF_UP));
-		cartItemRepository.save(cartItem);
+		model.addAttribute("productList", productList);
+		model.addAttribute("cartItemList", cartItemList);
+		model.addAttribute("total", total);
 
-		return "redirect:/stripe/";
-	}*/
+		return "stripe-cart";
+	}
 
+	// add product to the cart
+
+	/*
+	 * public String addToCart(String name) { Product product =
+	 * productRepository.findOne(name);
+	 * 
+	 * CartItem cartItem = new CartItem(); cartItem.setProduct(product);
+	 * cartItem.setQty(1); cartItem.setSubTotal(new
+	 * BigDecimal(product.getPrice()).setScale(2, BigDecimal.ROUND_HALF_UP));
+	 * cartItemRepository.save(cartItem);
+	 * 
+	 * return "redirect:/stripe/"; }
+	 */
 
 }

@@ -101,8 +101,10 @@ public class CartService implements ICartService {
 
 	// affichage les produit dans un cart
 
-	public List<String> getAllProductByCart(Long cartId) {
-		return productRepository.getAllProductByCart(cartId);
+	public List<Product> getAllProductByCart(Long cartId) {
+		Cart dep = cartRepeository.findById(cartId).get();
+		
+		return dep.getProduits();
 	}
 
 	public Cart getCartById(Long cartId) {

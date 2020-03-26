@@ -12,12 +12,11 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Product implements Serializable {
 
-	
-
-	
 	/**
 	 * 
 	 */
@@ -41,7 +40,7 @@ public class Product implements Serializable {
 	
 	private String dimention;
 		
-	private float weight ;
+	private float weight;
 	
 	private String color;
 	
@@ -52,21 +51,24 @@ public class Product implements Serializable {
 	private String brand;
 	
 	private int quantiteCart;
-
 	
-	
+	@JsonIgnore
 	@ManyToMany
 	private List<Command> commands;
 	
+	@JsonIgnore
 	@ManyToMany(mappedBy="produits")
 	private List<Cart> carts;
 	
+	@JsonIgnore
 	@ManyToOne
 	private Aisle aisle;
 	
+	@JsonIgnore
 	@ManyToMany
 	private List<User> users;
 	
+	@JsonIgnore
 	@ManyToMany(mappedBy="products")
 	private List<Stock> stocks;
 
@@ -77,9 +79,6 @@ public class Product implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-	
-	
 	
 	public int getQuantiteCart() {
 		return quantiteCart;
@@ -221,8 +220,6 @@ public class Product implements Serializable {
 		return serialVersionUID;
 	}
 
-	
-
 	public Product(Long id, String reference, Category category, String name, float price, String size,
 			String dimention, float weight, String color, float discount, String picture, String brand,
 			int quantiteCart, List<Command> commands, List<Cart> carts, Aisle aisle, List<User> users,
@@ -283,12 +280,5 @@ public class Product implements Serializable {
 				+ quantiteCart + ", commands=" + commands + ", carts=" + carts + ", aisle=" + aisle + ", users=" + users
 				+ ", stocks=" + stocks + "]";
 	}
-	
-	
-	
-	
-	
-	
-	
 
 }

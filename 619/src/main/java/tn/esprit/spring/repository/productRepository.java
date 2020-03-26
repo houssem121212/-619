@@ -14,7 +14,7 @@ import tn.esprit.spring.entities.Product;
 @Repository
 public interface productRepository extends CrudRepository<Product, Long> {
 
-	@Query("Select p.name , p.discount,p.price from Product p join p.carts dps where dps.id=:cartId")
+	@Query("Select p.id, p.reference, p.name, p.price, p.size, p.dimention, p.weight, p.color, p.discount, p.picture, p.brand, p.quantiteCart  from Product p join p.carts dps where dps.id=:cartId")
 	public List<String> getAllProductByCart(@Param("cartId") Long cartId);
-
+	
 }

@@ -60,8 +60,7 @@ public class cartController {
  //http://localhost:8081/SpringMVC/servlet/cart/getAllProductByCart/{idCart}
     @GetMapping(value = "getAllProductByCart/{idCart}")
     @ResponseBody
-	public List<String> getAllProductByCart(@PathVariable("idCart") Long idCart) {
-    	
+	public List<Product> getAllProductByCart(@PathVariable("idCart") Long idCart) {
 		return cartService.getAllProductByCart(idCart);
 	}
     
