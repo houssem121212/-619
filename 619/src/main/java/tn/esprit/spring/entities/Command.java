@@ -50,10 +50,10 @@ public class Command implements Serializable {
 	private Boolean commandEtat;
 
 	@JsonIgnore
-	@ManyToMany(mappedBy = "commands")
-	private List<Product> produits;
+	@ManyToMany
+	private List<Product> prod;
 
-	@JsonIgnore
+	
 	@OneToOne
 	private Facture facture;
 
@@ -62,11 +62,11 @@ public class Command implements Serializable {
 	@ManyToOne
 	private User user;
 
-	@JsonIgnore
+	
 	@ManyToOne
 	private Delivery delvey;
 	
-	@JsonIgnore
+	
 	@ManyToOne
 	private Don don;
 
@@ -121,12 +121,14 @@ public class Command implements Serializable {
 		this.commandEtat = commandEtat;
 	}
 
-	public List<Product> getProduits() {
-		return produits;
+	
+
+	public List<Product> getProd() {
+		return prod;
 	}
 
-	public void setProduits(List<Product> produits) {
-		this.produits = produits;
+	public void setProd(List<Product> prod) {
+		this.prod = prod;
 	}
 
 	public Facture getFacture() {
@@ -179,8 +181,8 @@ public class Command implements Serializable {
 	}
 
 	public Command(Long id, int numeroCommand, String commandType, float prix, LocalDate commandDate,
-			String commandAdresse, Boolean commandEtat, List<Product> produits, Facture facture, User user,
-			Delivery delvey, Don don) {
+			String commandAdresse, Boolean commandEtat, List<Product> prod, Facture facture, User user, Delivery delvey,
+			Don don) {
 		super();
 		this.id = id;
 		this.numeroCommand = numeroCommand;
@@ -189,7 +191,7 @@ public class Command implements Serializable {
 		this.commandDate = commandDate;
 		this.commandAdresse = commandAdresse;
 		this.commandEtat = commandEtat;
-		this.produits = produits;
+		this.prod = prod;
 		this.facture = facture;
 		this.user = user;
 		this.delvey = delvey;
@@ -197,7 +199,7 @@ public class Command implements Serializable {
 	}
 
 	public Command(int numeroCommand, String commandType, float prix, LocalDate commandDate, String commandAdresse,
-			Boolean commandEtat, List<Product> produits, Facture facture, User user, Delivery delvey, Don don) {
+			Boolean commandEtat, List<Product> prod, Facture facture, User user, Delivery delvey, Don don) {
 		super();
 		this.numeroCommand = numeroCommand;
 		this.commandType = commandType;
@@ -205,7 +207,7 @@ public class Command implements Serializable {
 		this.commandDate = commandDate;
 		this.commandAdresse = commandAdresse;
 		this.commandEtat = commandEtat;
-		this.produits = produits;
+		this.prod = prod;
 		this.facture = facture;
 		this.user = user;
 		this.delvey = delvey;
@@ -216,9 +218,10 @@ public class Command implements Serializable {
 	public String toString() {
 		return "Command [id=" + id + ", numeroCommand=" + numeroCommand + ", commandType=" + commandType + ", prix="
 				+ prix + ", commandDate=" + commandDate + ", commandAdresse=" + commandAdresse + ", commandEtat="
-				+ commandEtat + ", produits=" + produits + ", facture=" + facture + ", user=" + user + ", delvey="
-				+ delvey + ", don=" + don + "]";
+				+ commandEtat + ", prod=" + prod + ", facture=" + facture + ", user=" + user + ", delvey=" + delvey
+				+ ", don=" + don + "]";
 	}
+
 
 	
 

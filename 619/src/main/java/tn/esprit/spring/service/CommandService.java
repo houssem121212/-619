@@ -41,15 +41,19 @@ public class CommandService implements ICommandService {
 				
 				LocalDate today = LocalDate.now();
 				List<Product> prodcts = new ArrayList<>();
+				int taille = cartservice.getAllProductByCart(idCart).size();
 				
-				int employeNb = cartManagedEntity.getProduits().size();
-				for (int index = 0; index < employeNb; index++) {
-					prodcts.add(cartManagedEntity.getProduits().get(index));
+				for (int index = 0; index < taille; index++) {
+					prodcts.add(cartservice.getAllProductByCart(idCart).get(index));
+						
+					
 				}
 				
+				
+				
+				commandManagedEntity.setProd(prodcts);
 				commandManagedEntity.setPrix(cartManagedEntity.getTotal());
 				commandManagedEntity.setNumeroCommand(Numero);
-				commandManagedEntity.setProduits(prodcts);
 				commandManagedEntity.setCommandEtat(false);
 				commandManagedEntity.setCommandAdresse(Adresse);
 				commandManagedEntity.setCommandDate(today);
@@ -70,15 +74,20 @@ public class CommandService implements ICommandService {
 
 	
 	@Override
-	public Command searchCommandByNumero(Long numeroCommand) {
+	public List<Product> searchCommandByNumero(Long numeroCommand) {
 		// TODO Auto-generated method stub
-		return null;
+		
+Command cd = commandRepository.findById(numeroCommand).get();
+		
+		return cd.getProd();
 	}
 
 	@Override
 	public List<Command> SearchCommandByType(String typeCommand) {
 		// TODO Auto-generated method stub
-		return null;
+List<Command> command = commandRepository.findByType(typeCommand);	
+		
+		return command;
 	}
 
 	@Override
@@ -92,6 +101,8 @@ public class CommandService implements ICommandService {
 		
 		
 	}
+	
+	
 
 
 	

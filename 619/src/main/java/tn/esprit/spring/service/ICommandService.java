@@ -4,6 +4,7 @@ import java.util.List;
 
 import tn.esprit.spring.entities.ChargeRequest;
 import tn.esprit.spring.entities.Command;
+import tn.esprit.spring.entities.Product;
 import tn.esprit.spring.entities.email;
 
 public interface ICommandService {
@@ -14,7 +15,7 @@ public interface ICommandService {
 
 	
 
-	Command searchCommandByNumero(Long numeroCommand);
+	List<Product> searchCommandByNumero(Long numeroCommand);
 
 	List<Command> SearchCommandByType(String typeCommand);
 

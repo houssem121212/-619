@@ -53,7 +53,7 @@ public class Product implements Serializable {
 	private int quantiteCart;
 	
 	@JsonIgnore
-	@ManyToMany
+	@ManyToMany(mappedBy="prod")
 	private List<Command> commands;
 	
 	@JsonIgnore

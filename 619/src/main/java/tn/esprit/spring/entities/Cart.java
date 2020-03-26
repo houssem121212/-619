@@ -31,7 +31,7 @@ public class Cart implements Serializable {
 	@JsonIgnore
 	private List<Product> produits;
 
-	@JsonIgnore
+	
 	@OneToOne(mappedBy = "cart")
 	private User user;
 
