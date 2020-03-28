@@ -11,7 +11,7 @@ import tn.esprit.spring.entities.Don;
 import tn.esprit.spring.service.IDonService;
 
 @Controller
-public class IDonController {
+public class DonController {
 	
 @Autowired
 	private IDonService iDonService;
