@@ -61,6 +61,13 @@ public class EventService{
 	
 	
 	
+	
+	
+	
+	
+	
+	
+	
 	public List<String>getAllTitleEventJPQL(){
 		return eventReprository.TitleEvent();
 		

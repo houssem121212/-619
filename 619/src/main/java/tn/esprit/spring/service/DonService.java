@@ -4,18 +4,37 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tn.esprit.spring.entities.Don;
-
+import tn.esprit.spring.entities.Event;
 import tn.esprit.spring.repository.DonRepository;
 
 
 @Service
-public class DonService implements IDonService {
+public class DonService  {
 
 	@Autowired
 	DonRepository donRepository;
 	
-	public float ajouterDon(Don don) {
+	
+	
+	
+	
+	
+	public String ajouterDon (Don don){
 		donRepository.save(don);
-		return don.getMontantDon();
+		return "don sucess";
 	}
+	
+
+	
+	
+public void deletedonById (Long donId){
+		
+		Don DonId = donRepository.findById(donId).get();
+		
+		donRepository.delete(DonId);
+	
+	}
+	
+	
+	
 }

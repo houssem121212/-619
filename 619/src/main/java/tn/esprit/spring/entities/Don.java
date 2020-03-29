@@ -1,8 +1,10 @@
 package tn.esprit.spring.entities;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,9 +17,10 @@ public class Don implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private float montantDon;
-	private String descriptionDon ;
-	
+	private float montantdon;
+	private String descriptiondon;
+	@Column(name = "date")
+	private Date date;
 	
 	@ManyToOne
 	private User user;
@@ -36,20 +39,28 @@ public class Don implements Serializable {
 		this.id = id;
 	}
 
-	public float getMontantDon() {
-		return montantDon;
+	public float getMontantdon() {
+		return montantdon;
 	}
 
-	public void setMontantDon(float montantDon) {
-		this.montantDon = montantDon;
+	public void setMontantdon(float montantdon) {
+		this.montantdon = montantdon;
 	}
 
-	public String getDescriptionDon() {
-		return descriptionDon;
+	public String getDescriptiondon() {
+		return descriptiondon;
 	}
 
-	public void setDescriptionDon(String descriptionDon) {
-		this.descriptionDon = descriptionDon;
+	public void setDescriptiondon(String descriptiondon) {
+		this.descriptiondon = descriptiondon;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 	public User getUser() {
@@ -76,20 +87,19 @@ public class Don implements Serializable {
 		this.jackpot = jackpot;
 	}
 
-	public Don(Long id, float montantDon, String descriptionDon, User user, List<Command> cosmmands, Jackpot jackpot) {
-		super();
-		this.id = id;
-		this.montantDon = montantDon;
-		this.descriptionDon = descriptionDon;
-		this.user = user;
-		this.cosmmands = cosmmands;
-		this.jackpot = jackpot;
+	@Override
+	public String toString() {
+		return "Don [id=" + id + ", montantdon=" + montantdon + ", descriptiondon=" + descriptiondon + ", date=" + date
+				+ ", user=" + user + ", cosmmands=" + cosmmands + ", jackpot=" + jackpot + "]";
 	}
 
-	public Don(float montantDon, String descriptionDon, User user, List<Command> cosmmands, Jackpot jackpot) {
+	public Don(Long id, float montantdon, String descriptiondon, Date date, User user, List<Command> cosmmands,
+			Jackpot jackpot) {
 		super();
-		this.montantDon = montantDon;
-		this.descriptionDon = descriptionDon;
+		this.id = id;
+		this.montantdon = montantdon;
+		this.descriptiondon = descriptiondon;
+		this.date = date;
 		this.user = user;
 		this.cosmmands = cosmmands;
 		this.jackpot = jackpot;
@@ -99,12 +109,6 @@ public class Don implements Serializable {
 		super();
 	}
 
-	@Override
-	public String toString() {
-		return "Don [id=" + id + ", montantDon=" + montantDon + ", descriptionDon=" + descriptionDon + ", user=" + user
-				+ ", cosmmands=" + cosmmands + ", jackpot=" + jackpot + "]";
-	}
-	
 	
 	
 	
