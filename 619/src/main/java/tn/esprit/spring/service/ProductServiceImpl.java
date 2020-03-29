@@ -73,6 +73,7 @@ public class ProductServiceImpl implements IProductService {
 	
 	@Override
 	public int countSellByX(String x, String value) {
+		
 		return x.equals("color") ? productRepository.countSellByColor(value)
 				: x.equals("brand") ? productRepository.countSellByBrand(Long.parseLong(value))
 						: x.equals("category") ? productRepository.countSellByCategory(Long.parseLong(value))
