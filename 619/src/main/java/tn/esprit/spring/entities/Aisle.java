@@ -11,7 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
+@JsonIgnoreProperties({"products","user"})
 public class Aisle implements Serializable{
 private static final long serialVersionUID = 1L;
 	
@@ -23,7 +26,12 @@ private static final long serialVersionUID = 1L;
 	@OneToOne
 	private Category category;
 	
-	private int position;
+	private Integer position;
+	
+	private String type;
+	
+	@OneToMany
+	private List<Image> images;
 	
 	@OneToMany(mappedBy="aisle")
 	private List<Product> products;
@@ -47,12 +55,28 @@ private static final long serialVersionUID = 1L;
 		this.category = category;
 	}
 
-	public int getPosition() {
+	public Integer getPosition() {
 		return position;
 	}
 
-	public void setPosition(int position) {
+	public void setPosition(Integer position) {
 		this.position = position;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public List<Image> getImages() {
+		return images;
+	}
+
+	public void setImages(List<Image> images) {
+		this.images = images;
 	}
 
 	public List<Product> getProducts() {
@@ -75,19 +99,25 @@ private static final long serialVersionUID = 1L;
 		return serialVersionUID;
 	}
 
-	public Aisle(Long id, Category category, int position, List<Product> products, User user) {
+	public Aisle(Long id, Category category, Integer position, String type, List<Image> images, List<Product> products,
+			User user) {
 		super();
 		this.id = id;
 		this.category = category;
 		this.position = position;
+		this.type = type;
+		this.images = images;
 		this.products = products;
 		this.user = user;
 	}
 
-	public Aisle(Category category, int position, List<Product> products, User user) {
+	public Aisle(Category category, Integer position, String type, List<Image> images, List<Product> products,
+			User user) {
 		super();
 		this.category = category;
 		this.position = position;
+		this.type = type;
+		this.images = images;
 		this.products = products;
 		this.user = user;
 	}
@@ -98,9 +128,11 @@ private static final long serialVersionUID = 1L;
 
 	@Override
 	public String toString() {
-		return "Aisle [id=" + id + ", category=" + category + ", position=" + position + ", products=" + products
-				+ ", user=" + user + "]";
+		return "Aisle [id=" + id + ", category=" + category + ", position=" + position + ", type=" + type + ", images="
+				+ images + ", products=" + products + ", user=" + user + "]";
 	}
+
+	
 	
 	
 

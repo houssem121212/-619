@@ -15,11 +15,12 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.sun.istack.NotNull;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Command implements Serializable {
 
+	@JsonIgnoreProperties({"produits","don","aisle","user","facture","delvey"})
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -41,7 +42,7 @@ public class Command implements Serializable {
 	private Boolean commandEtat;
 	
 
-	@ManyToMany(mappedBy="commands")
+	@ManyToMany
 	private List<Product> produits;
 	
 	@OneToOne
