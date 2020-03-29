@@ -6521,3 +6521,9 @@ java.lang.StringIndexOutOfBoundsException: String index out of range: -1
 2020-03-29 23:31:58.666  INFO 19808 --- [http-nio-8081-exec-7] o.a.c.c.C.[.[localhost].[/SpringMVC]     : Initializing Spring DispatcherServlet 'dispatcherServlet'
 2020-03-29 23:31:58.666  INFO 19808 --- [http-nio-8081-exec-7] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
 2020-03-29 23:31:58.680  INFO 19808 --- [http-nio-8081-exec-7] o.s.web.servlet.DispatcherServlet        : Completed initialization in 13 ms
+2020-03-29 23:36:38.769  INFO 19808 --- [RMI TCP Connection(2)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2020-03-29 23:36:38.771  INFO 19808 --- [RMI TCP Connection(2)-127.0.0.1] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService 'taskScheduler'
+2020-03-29 23:36:38.773  INFO 19808 --- [RMI TCP Connection(2)-127.0.0.1] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-03-29 23:36:38.777  INFO 19808 --- [RMI TCP Connection(2)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2020-03-29 23:36:38.779  INFO 19808 --- [RMI TCP Connection(2)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2020-03-29 23:36:38.799  INFO 19808 --- [RMI TCP Connection(2)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
