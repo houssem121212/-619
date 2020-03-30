@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import tn.esprit.spring.entities.Don;
 import tn.esprit.spring.entities.Event;
 import tn.esprit.spring.service.DonService;
@@ -49,6 +50,11 @@ public void deletedonById(@PathVariable("idDon")Long DonId) {
 
 
 
+// http://localhost:8081/SpringMVC/servlet/affecterUserAdon/1/1
+@PutMapping(value = "/affecterUserAdon/{prods}/{donid}") 
+public void affecterUserAdon(@PathVariable("prods")Long commandId, @PathVariable("donid")Long donId) {
+	donService.affecterUserAdon(donId, commandId);
+}
 
 
 
