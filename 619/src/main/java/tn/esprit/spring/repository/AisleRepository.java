@@ -18,8 +18,11 @@ public interface AisleRepository extends JpaRepository<Aisle, Long>{
 	@Query("select p from  Product p join Aisle a on p.aisle = a.id  where a.id = :id ")
 	 public List<Product> getAisleProductById(@Param("id")Long id);
 	
-//	@Query("select i from  Image i join Aisle a on i.id = a.images  where i.id = :id ")
-//	 public List<Image> getListImageOfProductAisle(@Param("id") long id);
+	@Query("select i from  Image i join Aisle a where i.id = :id ")
+	 public List<Image> getListImageOfProductAisle(@Param("id") long id);
+	
+	@Query(value="select count(p.id) as pp from Product p join Aisle a join Command c  group by a.id order by pp  ", nativeQuery = true)
+	 public List<Integer> search(@Param("value")String value);
 	
 	 
 }

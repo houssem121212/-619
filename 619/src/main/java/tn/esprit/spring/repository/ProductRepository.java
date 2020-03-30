@@ -57,6 +57,8 @@ public interface ProductRepository extends JpaRepository<Product, Long>  {
 	 @Query(value="select count(*) from Product p join  Command c   join Brand b  where  p.brand =:brand ", nativeQuery = true)
 	 public int countSellByBrand(@Param("brand") Long brand);
 	 
+	 
+	 
 //	 @Query("select p from Product p where p.discount>0")
 //	 public List<Product> productWithDiscount();	 	 
 //	 
@@ -102,3 +104,4 @@ public interface ProductRepository extends JpaRepository<Product, Long>  {
 //	 		+ "`weight`=[value-10],`aisle_id`=[value-11],`category_id`=[value-12] WHERE")
 	  
 }
+

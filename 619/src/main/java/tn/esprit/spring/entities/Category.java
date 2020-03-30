@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 
 @Entity
 public class Category implements Serializable {
@@ -24,12 +23,6 @@ public class Category implements Serializable {
 	
 	@Column(name = "categoryDescription")
 	private String categoryDescription;
-
-	@Override
-	public String toString() {
-		return "Category [id=" + id + ", categoryName=" + categoryName + ", categoryDescription=" + categoryDescription
-				+ "]";
-	}
 
 	public Long getId() {
 		return id;
@@ -75,11 +68,13 @@ public class Category implements Serializable {
 	public Category() {
 		super();
 	}
+
+	@Override
+	public String toString() {
+		return "Category [id=" + id + ", categoryName=" + categoryName + ", categoryDescription=" + categoryDescription
+				+ "]";
+	}
+
 	
-	
-	
-	
-//	@OneToOne(mappedBy="categorie")
-//	private Ads ads;
 	
 }

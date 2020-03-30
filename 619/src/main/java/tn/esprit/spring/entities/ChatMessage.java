@@ -16,7 +16,7 @@ public class ChatMessage implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 
 	@Enumerated(EnumType.STRING)
 	private MessageType type;
@@ -25,11 +25,11 @@ public class ChatMessage implements Serializable {
 
 	private String Sender;
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -57,7 +57,7 @@ public class ChatMessage implements Serializable {
 		Sender = sender;
 	}
 
-	public ChatMessage(long id, MessageType type, String content, String sender) {
+	public ChatMessage(Long id, MessageType type, String content, String sender) {
 		super();
 		this.id = id;
 		this.type = type;
@@ -68,7 +68,7 @@ public class ChatMessage implements Serializable {
 	public ChatMessage() {
 		super();
 	}
-
+//test
 	@Override
 	public String toString() {
 		return "ChatMessage [id=" + id + ", type=" + type + ", Content=" + Content + ", Sender=" + Sender + "]";

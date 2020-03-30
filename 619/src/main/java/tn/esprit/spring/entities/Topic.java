@@ -21,13 +21,13 @@ public class Topic implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id_t;
+	private Long id_t;
 	
 	private String title;
 	
 	private String content;
 	
-	private long views;
+	private Long views;
 	
 	@Temporal(TemporalType.DATE)
 	private Date creationDate;
@@ -37,9 +37,9 @@ public class Topic implements Serializable {
 	
 	private boolean closed;
 
-	private long likeCount;
+	private Long likeCount;
 	
-	private long commentCount;
+	private Long commentCount;
 	private String image_t;
 	
 	@ManyToOne
@@ -53,10 +53,10 @@ public class Topic implements Serializable {
 	
 	
 	
-	public long getId_t() {
+	public Long getId_t() {
 		return id_t;
 	}
-	public void setId_t(long id_t) {
+	public void setId_t(Long id_t) {
 		this.id_t = id_t;
 	}
 	public String getTitle() {
@@ -71,10 +71,10 @@ public class Topic implements Serializable {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public long getViews() {
+	public Long getViews() {
 		return views;
 	}
-	public void setViews(long views) {
+	public void setViews(Long views) {
 		this.views = views;
 	}
 	public Date getCreationDate() {
@@ -95,16 +95,16 @@ public class Topic implements Serializable {
 	public void setClosed(boolean closed) {
 		this.closed = closed;
 	}
-	public long getLikeCount() {
+	public Long getLikeCount() {
 		return likeCount;
 	}
-	public void setLikeCount(long likeCount) {
+	public void setLikeCount(Long likeCount) {
 		this.likeCount = likeCount;
 	}
-	public long getCommentCount() {
+	public Long getCommentCount() {
 		return commentCount;
 	}
-	public void setCommentCount(long commentCount) {
+	public void setCommentCount(Long commentCount) {
 		this.commentCount = commentCount;
 	}
 	public String getImage_t() {
@@ -133,8 +133,8 @@ public class Topic implements Serializable {
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
 	}
-	public Topic(long id_t, String title, String content, long views, Date creationDate, Date lastUpDate,
-			boolean closed, long likeCount, long commentCount, String image_t, User user, Section section,
+	public Topic(Long id_t, String title, String content, Long views, Date creationDate, Date lastUpDate,
+			boolean closed, Long likeCount, Long commentCount, String image_t, User user, Section section,
 			List<Comment> comments) {
 		super();
 		this.id_t = id_t;
