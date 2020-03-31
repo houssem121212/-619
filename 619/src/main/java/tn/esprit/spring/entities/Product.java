@@ -74,6 +74,7 @@ public class Product implements Serializable {
 	@ManyToMany(mappedBy = "produits", fetch = FetchType.LAZY)
 	private List<Cart> carts;
 
+	
 	@ManyToOne
 	private Aisle aisle;
 
