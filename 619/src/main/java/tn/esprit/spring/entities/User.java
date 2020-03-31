@@ -40,7 +40,7 @@ public class User  {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    
+
     
     private int salary;
     @NotBlank
@@ -151,13 +151,11 @@ public class User  {
       @OneToOne(mappedBy="user")
   	private Ads ads;
       
-      @ManyToMany(mappedBy="users")
-  	private List<Product> products;
 
 	public User(Long id, @NotBlank @Size(max = 40) String name, @NotBlank @Size(max = 15) String username,
 			@NotBlank @Size(max = 40) @Email String email, @NotBlank @Size(max = 100) String password, Set<Role> roles,
 			List<Command> commands, List<Delivery> deliverys, List<Don> dons, Aisle aisle, List<Event> events,
-			Stock stocks, Cart cart, Ads ads, List<Product> products) {
+			Stock stocks, Cart cart, Ads ads) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -173,7 +171,7 @@ public class User  {
 		this.stocks = stocks;
 		this.cart = cart;
 		this.ads = ads;
-		this.products = products;
+		
 	}
 
 	
@@ -189,7 +187,7 @@ public class User  {
 	public User(Long id, int salary, @NotBlank @Size(max = 40) String name, @NotBlank @Size(max = 15) String username,
 			@NotBlank @Size(max = 40) @Email String email, @NotBlank @Size(max = 100) String password, Set<Role> roles,
 			List<Command> commands, List<Delivery> deliverys, List<Don> dons, Aisle aisle, List<Event> events,
-			Stock stocks, Cart cart, Ads ads, List<Product> products) {
+			Stock stocks, Cart cart, Ads ads) {
 		super();
 		this.id = id;
 		this.salary = salary;
@@ -206,7 +204,7 @@ public class User  {
 		this.stocks = stocks;
 		this.cart = cart;
 		this.ads = ads;
-		this.products = products;
+		
 	}
 
 	public List<Command> getCommands() {
@@ -273,20 +271,77 @@ public class User  {
 		this.ads = ads;
 	}
 
-	public List<Product> getProducts() {
-		return products;
+	
+	
+	    
+    
+
+
+	
+	@OneToMany( mappedBy="user")
+    private List<Comment> comments ;
+
+    @OneToMany( mappedBy="user")
+    private List<Topic> topics ;
+
+    @OneToMany( mappedBy="user")
+    private List<Reply> replies ;
+    
+    
+
+	public List<Comment> getComments() {
+		return comments;
 	}
 
-	public void setProducts(List<Product> products) {
-		this.products = products;
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
 	}
 
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", salary=" + salary + ", name=" + name + ", username=" + username + ", email="
-				+ email + ", password=" + password + ", roles=" + roles + ", Commands=" + Commands + ", deliverys="
-				+ deliverys + ", dons=" + dons + ", aisle=" + aisle + ", events=" + events + ", stocks=" + stocks
-				+ ", cart=" + cart + ", ads=" + ads + ", products=" + products + "]";
+	public List<Topic> getTopics() {
+		return topics;
+	}
+
+	public void setTopics(List<Topic> topics) {
+		this.topics = topics;
+	}
+
+	public List<Reply> getReplies() {
+		return replies;
+	}
+
+	public void setReplies(List<Reply> replies) {
+		this.replies = replies;
+	}
+
+	
+	public User(Long id, int salary, @NotBlank @Size(max = 40) String name, @NotBlank @Size(max = 15) String username,
+			@NotBlank @Size(max = 40) @Email String email, @NotBlank @Size(max = 100) String password, Set<Role> roles,
+			List<Command> commands, List<Delivery> deliverys, List<Don> dons, Aisle aisle, List<Event> events,
+			Stock stocks, Cart cart, Ads ads,  List<Comment> comments, List<Topic> topics,
+			List<Reply> replies) {
+		super();
+		this.id = id;
+		this.salary = salary;
+		this.name = name;
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.roles = roles;
+		Commands = commands;
+		this.deliverys = deliverys;
+		this.dons = dons;
+		this.aisle = aisle;
+		this.events = events;
+		this.stocks = stocks;
+		this.cart = cart;
+		this.ads = ads;
+		
+		this.comments = comments;
+		this.topics = topics;
+		this.replies = replies;
+	}
+
+
 	}
 
 
@@ -298,4 +353,4 @@ public class User  {
     
       
     
-}
+//}

@@ -20,11 +20,11 @@ public class Comment implements Serializable  {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id_c;
+	private Long id_c;
 
 	private String content_c;
 	private boolean useful ;
-	private long replyCount ;
+	private Long replyCount ;
 	private String image ;
 	
 	@Temporal(TemporalType.DATE) 
@@ -40,11 +40,11 @@ public class Comment implements Serializable  {
 	    private List<Reply> replies ;
 	
 
-	public long getId_c() {
+	public Long getId_c() {
 		return id_c;
 	}
 
-	public void setId_c(long id_c) {
+	public void setId_c(Long id_c) {
 		this.id_c = id_c;
 	}
 
@@ -64,11 +64,11 @@ public class Comment implements Serializable  {
 		this.useful = useful;
 	}
 
-	public long getReplyCount() {
+	public Long getReplyCount() {
 		return replyCount;
 	}
 
-	public void setReplyCount(long replyCount) {
+	public void setReplyCount(Long replyCount) {
 		this.replyCount = replyCount;
 	}
 
@@ -113,7 +113,7 @@ public class Comment implements Serializable  {
 		this.replies = replies;
 	}
 
-	public Comment(long id_c, String content_c, boolean useful, long replyCount, String image, Date creationDate,
+	public Comment(Long id_c, String content_c, boolean useful, Long replyCount, String image, Date creationDate,
 			User user, Topic topic, List<Reply> replies) {
 		super();
 		this.id_c = id_c;

@@ -1,25 +1,16 @@
 package tn.esprit.spring.control;
 
 import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
-
 import tn.esprit.spring.entities.User;
-import tn.esprit.spring.playod.PagedResponse;
-import tn.esprit.spring.playod.PollResponse;
 import tn.esprit.spring.playod.UserIdentityAvailability;
-import tn.esprit.spring.playod.UserProfile;
 import tn.esprit.spring.playod.UserSummary;
 import tn.esprit.spring.repository.UserRepository;
 import tn.esprit.spring.security.CurrentUser;
@@ -43,7 +34,7 @@ public class UserController {
 	@PreAuthorize("hasRole('USER')")
 	public UserSummary getCurrentUser(@CurrentUser UserPrincipal currentUser) {
 		UserSummary userSummary = new UserSummary(currentUser.getId(), currentUser.getUsername(),
-				currentUser.getName());
+		currentUser.getName());
 		return userSummary;
 	}
 

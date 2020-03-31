@@ -31,7 +31,7 @@ public class Reply implements Serializable {
 	Comment comment ;
 	
 	@ManyToOne
-	User user ;
+	User user;
 
 	public Long getId_r() {
 		return id_r;

@@ -1,26 +1,32 @@
 package tn.esprit.spring.entities;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
+@JsonIgnoreProperties({ "commands", "carts", "aisle", "users", "stocks", "brand" })
 public class Product implements Serializable {
 
-	
-
-	
 	/**
 	 * 
 	 */
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -29,43 +35,49 @@ public class Product implements Serializable {
 	private Long id;
 
 	private String reference;
-	
-	@OneToOne
-	private Category category;
-	
+
 	private String name;
-	
-	private float price;
-	
+
+	private Float price;
+
+	@Enumerated(EnumType.STRING)
 	private Size size;
-	
+
 	private String dimention;
-		
-	private float weight ;
-	
+
+	private Float weight;
+
 	private String color;
-	
-	private float discount;
-	
-	private String picture;
-	
+
+	private Float discount;
+
+	private Integer quantity;
+
+	private Date fabricationDate;
+
+	private Date expirationDate;
+
+	private Float tva;
+
+	@OneToMany(mappedBy = "produit")
+	private List<Image> picture;
+
+	@ManyToOne
 	private Brand brand;
 
-	
-	
-	@ManyToMany
+	@OneToOne
+	private Category category;
+
+	@ManyToMany(mappedBy = "produits", fetch = FetchType.LAZY)
 	private List<Command> commands;
-	
-	@ManyToMany(mappedBy="produits")
+
+	@ManyToMany(mappedBy = "produits", fetch = FetchType.LAZY)
 	private List<Cart> carts;
-	
+
 	@ManyToOne
 	private Aisle aisle;
-	
-	@ManyToMany
-	private List<User> users;
-	
-	@ManyToMany(mappedBy="products")
+
+	@ManyToMany(mappedBy = "products")
 	private List<Stock> stocks;
 
 	public Long getId() {
@@ -84,14 +96,6 @@ public class Product implements Serializable {
 		this.reference = reference;
 	}
 
-	public Category getCategory() {
-		return category;
-	}
-
-	public void setCategory(Category category) {
-		this.category = category;
-	}
-
 	public String getName() {
 		return name;
 	}
@@ -100,11 +104,11 @@ public class Product implements Serializable {
 		this.name = name;
 	}
 
-	public float getPrice() {
+	public Float getPrice() {
 		return price;
 	}
 
-	public void setPrice(float price) {
+	public void setPrice(Float price) {
 		this.price = price;
 	}
 
@@ -124,11 +128,11 @@ public class Product implements Serializable {
 		this.dimention = dimention;
 	}
 
-	public float getWeight() {
+	public Float getWeight() {
 		return weight;
 	}
 
-	public void setWeight(float weight) {
+	public void setWeight(Float weight) {
 		this.weight = weight;
 	}
 
@@ -140,19 +144,51 @@ public class Product implements Serializable {
 		this.color = color;
 	}
 
-	public float getDiscount() {
+	public Float getDiscount() {
 		return discount;
 	}
 
-	public void setDiscount(float discount) {
+	public void setDiscount(Float discount) {
 		this.discount = discount;
 	}
 
-	public String getPicture() {
+	public Integer getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
+	}
+
+	public Date getFabricationDate() {
+		return fabricationDate;
+	}
+
+	public void setFabricationDate(Date fabricationDate) {
+		this.fabricationDate = fabricationDate;
+	}
+
+	public Date getExpirationDate() {
+		return expirationDate;
+	}
+
+	public void setExpirationDate(Date expirationDate) {
+		this.expirationDate = expirationDate;
+	}
+
+	public Float getTva() {
+		return tva;
+	}
+
+	public void setTva(Float tva) {
+		this.tva = tva;
+	}
+
+	public List<Image> getPicture() {
 		return picture;
 	}
 
-	public void setPicture(String picture) {
+	public void setPicture(List<Image> picture) {
 		this.picture = picture;
 	}
 
@@ -162,6 +198,14 @@ public class Product implements Serializable {
 
 	public void setBrand(Brand brand) {
 		this.brand = brand;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 
 	public List<Command> getCommands() {
@@ -188,14 +232,6 @@ public class Product implements Serializable {
 		this.aisle = aisle;
 	}
 
-	public List<User> getUsers() {
-		return users;
-	}
-
-	public void setUsers(List<User> users) {
-		this.users = users;
-	}
-
 	public List<Stock> getStocks() {
 		return stocks;
 	}
@@ -208,13 +244,13 @@ public class Product implements Serializable {
 		return serialVersionUID;
 	}
 
-	public Product(Long id, String reference, Category category, String name, float price, Size size, String dimention,
-			float weight, String color, float discount, String picture, Brand brand, List<Command> commands,
-			List<Cart> carts, Aisle aisle, List<User> users, List<Stock> stocks) {
+	public Product(Long id, String reference, String name, Float price, Size size, String dimention, Float weight,
+			String color, Float discount, Integer quantity, Date fabricationDate, Date expirationDate, Float tva,
+			List<Image> picture, Brand brand, Category category, List<Command> commands, List<Cart> carts, Aisle aisle,
+			List<Stock> stocks) {
 		super();
 		this.id = id;
 		this.reference = reference;
-		this.category = category;
 		this.name = name;
 		this.price = price;
 		this.size = size;
@@ -222,24 +258,59 @@ public class Product implements Serializable {
 		this.weight = weight;
 		this.color = color;
 		this.discount = discount;
+		this.quantity = quantity;
+		this.fabricationDate = fabricationDate;
+		this.expirationDate = expirationDate;
+		this.tva = tva;
 		this.picture = picture;
 		this.brand = brand;
+		this.category = category;
 		this.commands = commands;
 		this.carts = carts;
 		this.aisle = aisle;
-		this.users = users;
+		this.stocks = stocks;
+	}
+
+	public Product(String reference, String name, Float price, Size size, String dimention, Float weight, String color,
+			Float discount, Integer quantity, Date fabricationDate, Date expirationDate, Float tva, List<Image> picture,
+			Brand brand, Category category, List<Command> commands, List<Cart> carts, Aisle aisle, List<Stock> stocks) {
+		super();
+		this.reference = reference;
+		this.name = name;
+		this.price = price;
+		this.size = size;
+		this.dimention = dimention;
+		this.weight = weight;
+		this.color = color;
+		this.discount = discount;
+		this.quantity = quantity;
+		this.fabricationDate = fabricationDate;
+		this.expirationDate = expirationDate;
+		this.tva = tva;
+		this.picture = picture;
+		this.brand = brand;
+		this.category = category;
+		this.commands = commands;
+		this.carts = carts;
+		this.aisle = aisle;
 		this.stocks = stocks;
 	}
 
 	public Product() {
 		super();
 	}
+
+	@Override
+	public String toString() {
+		return "Product [id=" + id + ", reference=" + reference + ", name=" + name + ", price=" + price + ", size="
+				+ size + ", dimention=" + dimention + ", weight=" + weight + ", color=" + color + ", discount="
+				+ discount + ", quantity=" + quantity + ", fabricationDate=" + fabricationDate + ", expirationDate="
+				+ expirationDate + ", tva=" + tva + "]";
+	}
+
 	
 	
-	
-	
-	
-	
+
 	
 
 }

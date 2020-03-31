@@ -1,5 +1,6 @@
 package tn.esprit.spring.entities;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -11,9 +12,11 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-public class Stock {
+@JsonIgnoreProperties({"products","users"})
+public class Stock implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -24,18 +27,44 @@ public class Stock {
 	
 	private Long capacite;
 	
-	private String categorie;
+	private String type;
 	
 	@OneToOne
-	private Adresse adress;
+	private Adresse adress;	
 
-	
-
-	@OneToMany(mappedBy="stocks",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="stocks")
 	private List<User> users;
 
 	@ManyToMany
 	private List<Product> products;
+
+	@Override
+	public String toString() {
+		return "Stock [id=" + id + ", capacite=" + capacite + ", type=" + type + ", adress=" + adress + "]";
+	}
+
+	public Stock(Long id, Long capacite, String type, Adresse adress, List<User> users, List<Product> products) {
+		super();
+		this.id = id;
+		this.capacite = capacite;
+		this.type = type;
+		this.adress = adress;
+		this.users = users;
+		this.products = products;
+	}
+
+	public Stock(Long capacite, String type, Adresse adress, List<User> users, List<Product> products) {
+		super();
+		this.capacite = capacite;
+		this.type = type;
+		this.adress = adress;
+		this.users = users;
+		this.products = products;
+	}
+
+	public Stock() {
+		super();
+	}
 
 	public Long getId() {
 		return id;
@@ -53,12 +82,12 @@ public class Stock {
 		this.capacite = capacite;
 	}
 
-	public String getCategorie() {
-		return categorie;
+	public String getType() {
+		return type;
 	}
 
-	public void setCategorie(String categorie) {
-		this.categorie = categorie;
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public Adresse getAdress() {
@@ -77,35 +106,6 @@ public class Stock {
 		this.users = users;
 	}
 
-	@Override
-	public String toString() {
-		return "Stock [id=" + id + ", capacite=" + capacite + ", categorie=" + categorie + ", adress=" + adress
-				+ ", users=" + users + ", products=" + products + "]";
-	}
-
-	public Stock() {
-		super();
-	}
-
-	public Stock(Long capacite, String categorie, Adresse adress, List<User> users, List<Product> products) {
-		super();
-		this.capacite = capacite;
-		this.categorie = categorie;
-		this.adress = adress;
-		this.users = users;
-		this.products = products;
-	}
-
-	public Stock(Long id, Long capacite, String categorie, Adresse adress, List<User> users, List<Product> products) {
-		super();
-		this.id = id;
-		this.capacite = capacite;
-		this.categorie = categorie;
-		this.adress = adress;
-		this.users = users;
-		this.products = products;
-	}
-
 	public List<Product> getProducts() {
 		return products;
 	}
@@ -116,9 +116,6 @@ public class Stock {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
-	}
-	
-	
-	
+	}			
 	
 }
