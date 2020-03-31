@@ -37,12 +37,12 @@ public class DonService  {
 	UserService UserService;
 
 	
-	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
-	public Long addDon (Don don){
+	
+	public Long addDon (Don don,Long idUser){
 		donRepository.save(don);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	//	affecterUserAdon(don.getId(),(currentUser.getId()));
+		affecterUserAdon(don.getId(),idUser);
 		return don.getId();
 	}
 	

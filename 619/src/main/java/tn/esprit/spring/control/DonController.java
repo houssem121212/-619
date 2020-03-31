@@ -2,7 +2,10 @@ package tn.esprit.spring.control;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +21,9 @@ import org.springframework.web.servlet.View;
 import tn.esprit.spring.entities.Don;
 import tn.esprit.spring.entities.Event;
 import tn.esprit.spring.entities.Product;
+import tn.esprit.spring.playod.UserSummary;
+import tn.esprit.spring.security.CurrentUser;
+import tn.esprit.spring.security.UserPrincipal;
 import tn.esprit.spring.service.DonService;
 import tn.esprit.spring.service.IDonService;
 import tn.esprit.spring.service.UserService;
@@ -37,9 +43,9 @@ private UserService userService;
 //http://localhost:8081/SpringMVC/servlet/api/aymen/ajoutdon
 @PostMapping("/ajoutdon")
 @ResponseBody
-public Don addDon(@RequestBody Don Don) {
+public Don addDon(@RequestBody Don Don,@CurrentUser UserPrincipal currentUser) {
 	System.out.println(Don.getMontantdon());
-	donService.addDon(Don);
+	donService.addDon(Don,currentUser.getId());
 	return Don;
 }
 //http://localhost:8081/SpringMVC/servlet/api/aymen/updateDon
@@ -76,7 +82,6 @@ public int GetUserMontantDonate(Long id) {
 	 
 
 }
-
 
 
 
