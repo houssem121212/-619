@@ -3,23 +3,18 @@ package tn.esprit.spring.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import tn.esprit.spring.control.UserController;
 import tn.esprit.spring.entities.Command;
 import tn.esprit.spring.entities.Don;
-import tn.esprit.spring.entities.Event;
+import tn.esprit.spring.entities.Jackpot;
 import tn.esprit.spring.entities.Product;
 import tn.esprit.spring.entities.User;
 import tn.esprit.spring.repository.CommandRepository;
 import tn.esprit.spring.repository.DonRepository;
+import tn.esprit.spring.repository.JackpotRepository;
 import tn.esprit.spring.repository.UserRepository;
-import tn.esprit.spring.security.CurrentUser;
 
 
 @Service
@@ -35,13 +30,13 @@ public class DonService  {
 	
 	@Autowired
 	UserService UserService;
-
+	@Autowired
+	JackpotRepository jackpotRepository;
 	
 
 	
 	public Long addDon (Don don,Long idUser){
-		donRepository.save(don);
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		donRepository.save(don);		
 		affecterUserAdon(don.getId(),idUser);
 		return don.getId();
 	}
@@ -110,24 +105,38 @@ public void deletedonById (Long donId){
 		
 	}
 	
-	
-	
-	public List<Product> getProductByDon(Long donId)
-	{
-		Don donManagedEntity = donRepository.findById(donId).get();
+	public void affecterdonAJAckpot( Long donId,Long jackpotId) {
 		
-		List<Command> commands=donManagedEntity.getCosmmands();
+				Don don = donRepository.findById(donId).get();
+				Jackpot jackpot = jackpotRepository.findById(jackpotId).get();
+				
+				if(don.getJackpot()==null){
+					don.setJackpot(jackpot);
+					donRepository.save(don);
+				}
+				
 		
-		List<Product> prods = new 	ArrayList<>();
-		int taille = commands.size();
-		for (int index = 0; index < taille; index++) {
-			prods.add((Product) commands.get(index).getProduits());
-			
-		}
-		return prods;
-					
+		
 	}
 	
+	
+	
+//	public List<Product> getProductByDon(Long donId)
+//	{
+//		Don donManagedEntity = donRepository.findById(donId).get();
+//		
+//		List<Command> commands=donManagedEntity.getCosmmands();
+//		
+//		List<Product> prods = new 	ArrayList<>();
+//		int taille = commands.size();
+//		for (int index = 0; index < taille; index++) {
+//			prods.add((Product) commands.get(index).getProduits());
+//			
+//		}
+//		return prods;
+//					
+//	}
+//	
 	
 	
 	

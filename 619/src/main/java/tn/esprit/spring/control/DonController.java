@@ -39,15 +39,26 @@ public class DonController {
 private UserService userService;
 
 
-
+//ajouter un don par user
 //http://localhost:8081/SpringMVC/servlet/api/aymen/ajoutdon
 @PostMapping("/ajoutdon")
 @ResponseBody
-public Don addDon(@RequestBody Don Don,@CurrentUser UserPrincipal currentUser) {
-	System.out.println(Don.getMontantdon());
+public String addDon(@RequestBody Don Don,@CurrentUser UserPrincipal currentUser) {
+	//System.out.println(Don.getMontantdon());
+	//System.err.println(currentUser.getId());
 	donService.addDon(Don,currentUser.getId());
-	return Don;
+return "Don sucess"+currentUser.getId();
 }
+
+//affecter le don a Jackpot 
+//http://localhost:8081/SpringMVC/servlet/api/aymen/affecterDonToJackpot
+@PostMapping("/affecterDonToJackpot")
+@ResponseBody
+public String affecterDonToJackpot(@RequestParam("idDon") Long idDon,@RequestParam("jackpotId") long jackpotId) {	
+	donService.affecterdonAJAckpot(idDon, jackpotId);
+return "Don sucess affected to jackpot ";
+}
+
 //http://localhost:8081/SpringMVC/servlet/api/aymen/updateDon
 @PutMapping("/updateDon")
 @ResponseBody
@@ -74,7 +85,7 @@ return donService.getAllDon();
 }
 
 
-
+//montant collecter
 //http://localhost:8081/SpringMVC/servlet/api/aymen/GetUserMontantDonate
 @GetMapping("/GetUserMontantDonate")
 public int GetUserMontantDonate(Long id) {
