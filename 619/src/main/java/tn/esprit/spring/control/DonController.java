@@ -41,23 +41,25 @@ private UserService userService;
 
 //ajouter un don par user
 //http://localhost:8081/SpringMVC/servlet/api/aymen/ajoutdon
-@PostMapping("/ajoutdon")
+@PostMapping("/ajoutdon/{jackpotId}")
 @ResponseBody
-public String addDon(@RequestBody Don Don,@CurrentUser UserPrincipal currentUser) {
+public String addDon(@RequestBody Don Don,@CurrentUser UserPrincipal currentUser,@PathVariable("jackpotId") Long jackpotId) {
 	//System.out.println(Don.getMontantdon());
 	//System.err.println(currentUser.getId());
-	donService.addDon(Don,currentUser.getId());
-return "Don sucess"+currentUser.getId();
+	
+return donService.addDon(Don,currentUser.getId(),jackpotId);
 }
+
+
 
 //affecter le don a Jackpot 
 //http://localhost:8081/SpringMVC/servlet/api/aymen/affecterDonToJackpot
-@PostMapping("/affecterDonToJackpot")
-@ResponseBody
-public String affecterDonToJackpot(@RequestParam("idDon") Long idDon,@RequestParam("jackpotId") long jackpotId) {	
-	donService.affecterdonAJAckpot(idDon, jackpotId);
-return "Don sucess affected to jackpot ";
-}
+//@PostMapping("/affecterDonToJackpot")
+//@ResponseBody
+//public String affecterDonToJackpot(@RequestParam("idDon") Long idDon,@RequestParam("jackpotId") long jackpotId) {	
+//	donService.affecterdonAJAckpot(idDon, jackpotId);
+//return "Don sucess affected to jackpot ";
+//}
 
 //http://localhost:8081/SpringMVC/servlet/api/aymen/updateDon
 @PutMapping("/updateDon")
@@ -79,7 +81,7 @@ public void deletedonById(@PathVariable("idDon")Long DonId) {
 //http://localhost:8081/SpringMVC/servlet/api/aymen/donnor
 @GetMapping("/donnor")
 @ResponseBody
-private Iterable<Don> View() {
+private List<Don> View() {
 return donService.getAllDon();
 
 }
@@ -90,14 +92,18 @@ return donService.getAllDon();
 @GetMapping("/GetUserMontantDonate")
 public int GetUserMontantDonate(Long id) {
 	return donService.getSumDon();	 
-	 
-
+		
 }
 
 
 
-
-
+//montant collecter
+//http://localhost:8081/SpringMVC/servlet/api/aymen/GetUserDonate
+@GetMapping("/GetUserDonate")
+public int GetUserDonate(Long id) {
+	return donService.getSumDonbyUser();	 
+		
+}
 
 
 
@@ -111,9 +117,16 @@ public void affecterUserAdon(@PathVariable("userId")Long userId, @PathVariable("
 
 
 
-public String ListDon (List<Don> Dons){
-	return null;
-	
-	
-}
+
+
+
+
+
+
+//
+//private List<Don> View2(Long donId) {
+//return donService.getProductByDon();
+//	
+//	
+//}
 }

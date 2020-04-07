@@ -1,6 +1,8 @@
 package tn.esprit.spring.service;
 
+
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import tn.esprit.spring.entities.User;
 import tn.esprit.spring.repository.CommandRepository;
 import tn.esprit.spring.repository.DonRepository;
 import tn.esprit.spring.repository.JackpotRepository;
+import tn.esprit.spring.repository.ProductRepository;
 import tn.esprit.spring.repository.UserRepository;
 
 
@@ -33,12 +36,36 @@ public class DonService  {
 	@Autowired
 	JackpotRepository jackpotRepository;
 	
-
+@Autowired
+ProductRepository productRepository;
 	
-	public Long addDon (Don don,Long idUser){
+	public String addDon (Don don,Long idUser,Long jackpotId){
+		
+	
+		Date g = new Date();
+		g.getTime();
+		
+	
+		
+		
+		
+		Jackpot jackpot = jackpotRepository.findById(jackpotId).get();
+		
+		if (g.compareTo(jackpot.getDatefin())<0 )
+			
+		{
+		don.setJackpot(jackpot);
+		
+	//	if (g.compareTo(anotherDate))
+		
+		
+		
 		donRepository.save(don);		
 		affecterUserAdon(don.getId(),idUser);
-		return don.getId();
+		return "don sucess";}
+		
+		else
+		return "no don yet";
 	}
 	
 
@@ -76,7 +103,9 @@ public void deletedonById (Long donId){
 	}
 
 	
-	
+	public int getSumDonbyUser(){
+		return donRepository.countByUserID();
+	}
 	
 	
 	
@@ -88,11 +117,7 @@ public void deletedonById (Long donId){
 	
 	
 	public void affecterUserAdon( Long donId,Long userId) {
-		//Le bout Master de cette relation N:1 est departement  
-				//donc il faut rajouter l'entreprise a departement 
-				// ==> c'est l'objet departement(le master) qui va mettre a jour l'association
-				//Rappel : la classe qui contient mappedBy represente le bout Slave
-				//Rappel : Dans une relation oneToMany le mappedBy doit etre du cote one.
+
 				Don don = donRepository.findById(donId).get();
 				User user = userRepository.findById(userId).get();
 				
@@ -105,15 +130,17 @@ public void deletedonById (Long donId){
 		
 	}
 	
-	public void affecterdonAJAckpot( Long donId,Long jackpotId) {
+	public void affecterdonAJAckpot( Don don,Long jackpotId) {
+	//	Don d = new Don ();
 		
-				Don don = donRepository.findById(donId).get();
+		
+			//	Don don = donRepository.findById(donId).get();
 				Jackpot jackpot = jackpotRepository.findById(jackpotId).get();
 				
-				if(don.getJackpot()==null){
+				
 					don.setJackpot(jackpot);
 					donRepository.save(don);
-				}
+				
 				
 		
 		
@@ -121,30 +148,30 @@ public void deletedonById (Long donId){
 	
 	
 	
-//	public List<Product> getProductByDon(Long donId)
-//	{
-//		Don donManagedEntity = donRepository.findById(donId).get();
-//		
-//		List<Command> commands=donManagedEntity.getCosmmands();
-//		
-//		List<Product> prods = new 	ArrayList<>();
-//		int taille = commands.size();
-//		for (int index = 0; index < taille; index++) {
-//			prods.add((Product) commands.get(index).getProduits());
-//			
-//		}
-//		return prods;
-//					
-//	}
-//	
+	public List<Product> getProductByDon(Long donId)
+	{
+		Don donManagedEntity = donRepository.findById(donId).get();
+		
+		List<Command> commands=donManagedEntity.getCosmmands();
+		
+		List<Product> prods = new 	ArrayList<>();
+		int taille = commands.size();
+		for (int index = 0; index < taille; index++) {
+			prods.add((Product) commands.get(index).getProduits());
+			
+		}
+		return prods;
+					
+	}
 	
 	
-	
-	
+
+
+	}
 
 	
 
 
 	
 	
-}
+

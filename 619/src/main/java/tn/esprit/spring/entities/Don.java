@@ -11,8 +11,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
+@JsonIgnoreProperties({"cosmmands","jackpot","user"})
 public class Don implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +25,7 @@ public class Don implements Serializable {
 	private float montantdon;
 	private String descriptiondon;
 	@Column(name = "date")
+ 
 	private Date date;
 	
 	@ManyToOne

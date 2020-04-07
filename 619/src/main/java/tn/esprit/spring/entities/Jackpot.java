@@ -1,6 +1,7 @@
 package tn.esprit.spring.entities;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -17,7 +18,8 @@ public class Jackpot implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String titre;
-	private float duree;
+	
+	private Date  datefin;
 	private float maxValue;
 	
 	
@@ -29,42 +31,9 @@ public class Jackpot implements Serializable {
 	private List<Don> dons;
 
 
-	
-
-
-	public Jackpot(String titre, float duree, float maxValue, Typejackpot typeJackpot, List<Don> dons) {
-		super();
-		this.titre = titre;
-		this.duree = duree;
-		this.maxValue = maxValue;
-		this.typeJackpot = typeJackpot;
-		this.dons = dons;
-	}
-
-
-
-
-
-	public Jackpot(Long id, String titre, float duree, float maxValue, Typejackpot typeJackpot, List<Don> dons) {
-		super();
-		this.id = id;
-		this.titre = titre;
-		this.duree = duree;
-		this.maxValue = maxValue;
-		this.typeJackpot = typeJackpot;
-		this.dons = dons;
-	}
-
-
-
-
-
 	public Long getId() {
 		return id;
 	}
-
-
-
 
 
 	public void setId(Long id) {
@@ -72,15 +41,9 @@ public class Jackpot implements Serializable {
 	}
 
 
-
-
-
 	public String getTitre() {
 		return titre;
 	}
-
-
-
 
 
 	public void setTitre(String titre) {
@@ -88,23 +51,14 @@ public class Jackpot implements Serializable {
 	}
 
 
-
-
-
-	public float getDuree() {
-		return duree;
+	public Date getDatefin() {
+		return datefin;
 	}
 
 
-
-
-
-	public void setDuree(float duree) {
-		this.duree = duree;
+	public void setDatefin(Date datefin) {
+		this.datefin = datefin;
 	}
-
-
-
 
 
 	public float getMaxValue() {
@@ -112,15 +66,9 @@ public class Jackpot implements Serializable {
 	}
 
 
-
-
-
 	public void setMaxValue(float maxValue) {
 		this.maxValue = maxValue;
 	}
-
-
-
 
 
 	public Typejackpot getTypeJackpot() {
@@ -128,15 +76,9 @@ public class Jackpot implements Serializable {
 	}
 
 
-
-
-
 	public void setTypeJackpot(Typejackpot typeJackpot) {
 		this.typeJackpot = typeJackpot;
 	}
-
-
-
 
 
 	public List<Don> getDons() {
@@ -144,15 +86,37 @@ public class Jackpot implements Serializable {
 	}
 
 
-
-
-
 	public void setDons(List<Don> dons) {
 		this.dons = dons;
 	}
 
 
+	@Override
+	public String toString() {
+		return "Jackpot [id=" + id + ", titre=" + titre + ", datefin=" + datefin + ", maxValue=" + maxValue
+				+ ", typeJackpot=" + typeJackpot + ", dons=" + dons + "]";
+	}
 
+
+	public Jackpot(Long id, String titre, Date datefin, float maxValue, Typejackpot typeJackpot, List<Don> dons) {
+		super();
+		this.id = id;
+		this.titre = titre;
+		this.datefin = datefin;
+		this.maxValue = maxValue;
+		this.typeJackpot = typeJackpot;
+		this.dons = dons;
+	}
+
+
+	public Jackpot(String titre, Date datefin, float maxValue, Typejackpot typeJackpot, List<Don> dons) {
+		super();
+		this.titre = titre;
+		this.datefin = datefin;
+		this.maxValue = maxValue;
+		this.typeJackpot = typeJackpot;
+		this.dons = dons;
+	}
 
 
 	public Jackpot() {
