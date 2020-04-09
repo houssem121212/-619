@@ -67,4 +67,6 @@ public class EventController {
 		
 		return eventService.getAllTitleEventJPQL();
 	}
+    
+    
 }

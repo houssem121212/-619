@@ -2,6 +2,8 @@ package tn.esprit.spring.repository;
 
 
 
+
+
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -18,13 +20,20 @@ public interface DonRepository extends JpaRepository <Don,Long> {
 	    int countAllDonatedSacks();
 	 
 	 
-	 @Query(value = "SELECT count(distinct `user_id`) from Don", nativeQuery = true)
+	// nombre de participants dans un jackpot 
+	 @Query(value = "SELECT count(user_id) from Don   Group By jackpot_id ", nativeQuery = true)
 	 	 
-	    int countAllBeneficiaries();
+	    int countParticipantByJackpot(@Param("idDon") Long idDon);
+	 
+	 
+	 
 	 
 	 @Query(value = "SELECT count(montantdon`) from Don Order By  user_Id ", nativeQuery = true)
  	 
 	    int countByUserID();	
+	 
+	 
+	 
 	 
 //	 @Query(value = "select  do.category_name from category ca "
 //				+ " inner join product p on p.category_id = ca.id  "
@@ -36,4 +45,19 @@ public interface DonRepository extends JpaRepository <Don,Long> {
 	 
 	//@Query("SELECT count(*) FROM Employe")
     //public int countemp();
+	 
+	 
+	 
+	 // hna 7ajetna njibou les produit X mta3 don y elli type mta3ha produit 
+	 // les donner 3anna id mta3 don 
+	 
+	// @Query(value="select p.* from Don d join Command co on co.don_id=d.id join command_produits c on c.commands_id = co.id join Product p  on p.id = c.produits_id where  d.id =:idDon", nativeQuery = true)
+	 
+	 @Query(value="select p.*  from Don  d join Command co on co.don_id=d.id join command_produits c on c.commands_id = co.id join Product p  on p.id = c.produits_id where  d.id =:idDon", nativeQuery = true)
+	 public List<Product> getDonProduct(@Param("idDon") Long idDon);
+	 
+	 @Query(value="select p.* from Don d join Command co on co.don_id=d.id join command_produits c on c.commands_id = co.id join Product p  on p.id = c.produits_id where  d.id =1", nativeQuery = true)
+	 public List<String> getProduct();
+	 
+	 
 }

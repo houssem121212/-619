@@ -94,8 +94,12 @@ public int GetUserMontantDonate(Long id) {
 	return donService.getSumDon();	 
 		
 }
-
-
+//http://localhost:8081/SpringMVC/servlet/api/aymen/GeParticipantByJackpot/1
+@GetMapping("/GeParticipantByJackpot/{id}")
+public int GeParticipantByJackpot(@PathVariable("id") Long id) {
+	return donService.countParticipantByJackpot(id);	 
+		
+}
 
 //montant collecter
 //http://localhost:8081/SpringMVC/servlet/api/aymen/GetUserDonate
@@ -106,6 +110,27 @@ public int GetUserDonate(Long id) {
 }
 
 
+//http://localhost:8081/SpringMVC/servlet/api/aymen/pourcentageDonByJackpot/1/3
+@GetMapping("/pourcentageDonByJackpot/{donId}/{jackpotId}")
+public float pourcentageDonByJackpot(@PathVariable("donId") Long donId ,@PathVariable("donId")Long jackpotId) {
+	return donService.pourcentageDonByJackpot(donId, jackpotId);	 
+		
+}
+
+
+
+@GetMapping("/getListProductByDon/{id}")
+public List<Product> getListProductByDon(@PathVariable("id") Long id) {
+	return donService.getListDonProduct(id);	 
+	
+	
+}
+
+@GetMapping("/getListProductByDon")
+public List<String> getListProduct() {
+	return donService.getProduct();	 
+		
+}
 
 
 

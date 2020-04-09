@@ -20,7 +20,7 @@ import javax.persistence.OneToOne;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@JsonIgnoreProperties({ "commands", "carts", "aisle", "users", "stocks", "brand" })
+@JsonIgnoreProperties({ "commands", "carts", "aisle", "users", "stocks", "brand" ,"picture"})
 public class Product implements Serializable {
 
 	/**
@@ -245,6 +245,29 @@ public class Product implements Serializable {
 		return serialVersionUID;
 	}
 
+	public Product(Long id,String color,String dimention,Float discount,Date expirationDate,Date fabricationDate,String name,
+			Float price,Integer quantity,String reference,Size size,Float tva,Float weight,Aisle aisle,Brand brand,Category category	){
+		super();
+		this.id = id;
+		this.reference = reference;
+		this.name = name;
+		this.price = price;
+		this.size = size;
+		this.dimention = dimention;
+		this.weight = weight;
+		this.color = color;
+		this.discount = discount;
+		this.quantity = quantity;
+		this.fabricationDate = fabricationDate;
+		this.expirationDate = expirationDate;
+		this.tva = tva;
+		
+		this.brand = brand;
+		this.category = category;
+
+		this.aisle = aisle;
+	}
+	
 	public Product(Long id, String reference, String name, Float price, Size size, String dimention, Float weight,
 			String color, Float discount, Integer quantity, Date fabricationDate, Date expirationDate, Float tva,
 			List<Image> picture, Brand brand, Category category, List<Command> commands, List<Cart> carts, Aisle aisle,
@@ -303,11 +326,14 @@ public class Product implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Product [id=" + id + ", reference=" + reference + ", name=" + name + ", price=" + price + ", size="
-				+ size + ", dimention=" + dimention + ", weight=" + weight + ", color=" + color + ", discount="
-				+ discount + ", quantity=" + quantity + ", fabricationDate=" + fabricationDate + ", expirationDate="
-				+ expirationDate + ", tva=" + tva + "]";
+		return "Product [id=" + id + ", reference=" + reference + ", name=" + name + ", price=" + price + ", dimention="
+				+ dimention + ", weight=" + weight + ", color=" + color + ", discount=" + discount + ", quantity="
+				+ quantity + ", fabricationDate=" + fabricationDate + ", expirationDate=" + expirationDate + "]";
 	}
+
+	
+
+
 
 	
 	

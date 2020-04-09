@@ -33,6 +33,7 @@ public class DonService  {
 	
 	@Autowired
 	UserService UserService;
+	
 	@Autowired
 	JackpotRepository jackpotRepository;
 	
@@ -109,6 +110,9 @@ public void deletedonById (Long donId){
 	
 	
 	
+	public int countParticipantByJackpot(Long id){
+		return donRepository.countParticipantByJackpot(id);
+	}
 	
 	
 	
@@ -146,6 +150,49 @@ public void deletedonById (Long donId){
 		
 	}
 	
+	public List <Product> getListDonProduct(Long id){
+		List <Product> l= productRepository.getDonProduct(id);
+		System.out.println(l);
+		return l;
+	}
+	
+	public List<String> getProduct(){
+		List<String> l= donRepository.getProduct();
+		System.out.println(l);
+		return l;
+	}
+	
+	
+	
+	public float     pourcentageDonByJackpot (Long donId,Long jackpotId ){
+		
+		Don don = donRepository.findById(donId).get();
+		
+		don.getMontantdon();
+		System.out.println(don);
+		Jackpot jackpot = jackpotRepository.findById(jackpotId).get();
+		jackpot.getMaxValue();
+		System.out.println(jackpot.getMaxValue());
+		 float percentage = (float) ((don.getMontantdon() * 100) / jackpot.getMaxValue());
+		 
+		 if( jackpot.getMaxValue()==0) throw new RuntimeException("maxValue introuvable");
+		 return percentage ;
+		 
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	public List<Product> getProductByDon(Long donId)
@@ -163,6 +210,8 @@ public void deletedonById (Long donId){
 		return prods;
 					
 	}
+	
+	
 	
 	
 
