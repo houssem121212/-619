@@ -112,7 +112,7 @@ public int GetUserDonate(Long id) {
 
 //http://localhost:8081/SpringMVC/servlet/api/aymen/pourcentageDonByJackpot/1/3
 @GetMapping("/pourcentageDonByJackpot/{donId}/{jackpotId}")
-public float pourcentageDonByJackpot(@PathVariable("donId") Long donId ,@PathVariable("donId")Long jackpotId) {
+public String pourcentageDonByJackpot(@PathVariable("donId") Long donId ,@PathVariable("jackpotId")Long jackpotId) {
 	return donService.pourcentageDonByJackpot(donId, jackpotId);	 
 		
 }

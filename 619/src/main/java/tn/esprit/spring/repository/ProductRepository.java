@@ -94,8 +94,8 @@ public interface ProductRepository extends JpaRepository<Product, Long>  {
 	 @Query(value="select * from Product  where ? ", nativeQuery = true)
 	 public List<Product> filter(String filter);
 	 
-	// @Query(value="select p.* from Don d join Command co on co.don_id=d.id join command_produits c on c.commands_id = co.id join Product p  on p.id = c.produits_id where  d.id =:idDon", nativeQuery = true)
-	 @Query(value="select p.*  from Product p join Command_produits cp on cp.produits_id=p.id join command c on c.id = cp.commands_id join Don d on d.id =c.don_id  where  d.id =:idDon", nativeQuery = true)
+	 @Query(value="select p.* from Don d join Command co on co.don_id=d.id join command_produits c on c.commands_id = co.id join Product p  on p.id = c.produits_id where  d.id =:idDon", nativeQuery = true)
+	// @Query(value="select p.*  from Product p join Command_produits cp on cp.produits_id=p.id join command c on c.id = cp.commands_id join Don d on d.id =c.don_id  where  d.id =:idDon", nativeQuery = true)
 	 public List<Product> getDonProduct(@Param("idDon") Long idDon);
 	 
 //	 @Modifying

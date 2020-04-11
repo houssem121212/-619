@@ -11,20 +11,29 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import tn.esprit.spring.entities.Event;
+import java.lang.String;
 
 @Repository
 public interface EventRepository extends JpaRepository<Event, Long> {
 	
 	
+	List<Event> findByPrice(float price);
 	
+
 	  @Query("SELECT titre_event FROM Event")
 	    public List<String> TitleEvent();
+	  
+	  
+	  
 	  
 	
 	  @Modifying
 	    @Transactional
 	    @Query("UPDATE Event e SET e.titre_event=:titre_event1 where e.id=:eventId")
 	    public void mettreAjourtitre_eventIdJPQL(@Param("titre_event1")String titre, @Param("eventId")int eventId);
+	  
+	  @Query("SELECT e FROM Event e where e.titre_event=:name")
+	  public List<Event>  findEventsByName(@Param("name") String EventName);
 	  
 	   //public List<String> findByEventCategory(String eventCategory);
 	  //  public List<String> findByOrganizerID(Long organizerID);

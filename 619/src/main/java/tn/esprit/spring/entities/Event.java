@@ -15,8 +15,12 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name = "Event")
+//JsonIgnoreProperties({"Event"})
 public class Event implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,6 +46,7 @@ public class Event implements Serializable{
 	private Date date_end_event;
 	
 	@ManyToMany
+	@JsonIgnore
 	private List<User> users;
 
 	public Long getId() {

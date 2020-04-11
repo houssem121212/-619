@@ -80,6 +80,7 @@ public class JackpotController {
 	
 	//http://localhost:8081/SpringMVC/servlet/api/aymen/jackpot/daterestant/3
 	@GetMapping("/daterestant/{jackpotId}")
+	
 	@ResponseBody
 	public Long  daysBetween(@PathVariable("jackpotId" ) Long jackpotId){
 		

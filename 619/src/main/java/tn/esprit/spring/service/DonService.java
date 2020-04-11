@@ -163,20 +163,21 @@ public void deletedonById (Long donId){
 	}
 	
 	
+	//countDonByjackpot
+	public String     pourcentageDonByJackpot (Long donId,Long jackpotId ){
+		
+		//Don don = donRepository.findById(donId).get();
+		
 	
-	public float     pourcentageDonByJackpot (Long donId,Long jackpotId ){
-		
-		Don don = donRepository.findById(donId).get();
-		
-		don.getMontantdon();
-		System.out.println(don);
+		//System.out.println(donRepository.countDonByjackpot());
 		Jackpot jackpot = jackpotRepository.findById(jackpotId).get();
-		jackpot.getMaxValue();
-		System.out.println(jackpot.getMaxValue());
-		 float percentage = (float) ((don.getMontantdon() * 100) / jackpot.getMaxValue());
+		//jackpot.getMaxValue();
+		//System.out.println(jackpot.getMaxValue());
+		
+		 float percentage = (float) ((donRepository.countDonByjackpot( donId,jackpotId) * 100) / jackpot.getMaxValue())*100;
 		 
-		 if( jackpot.getMaxValue()==0) throw new RuntimeException("maxValue introuvable");
-		 return percentage ;
+		 if( jackpot.getMaxValue()==0) throw new RuntimeException("maxValue can be not null becha");
+		 return (int)percentage+"%" ;
 		 
 	}
 	

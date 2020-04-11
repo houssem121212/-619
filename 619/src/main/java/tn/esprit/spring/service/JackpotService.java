@@ -44,6 +44,7 @@ public void deletejackpotById (Long jackpotId){
 	
 public List<Jackpot> getAllJackpot() {
 
+
 	return jackpotrepository.findAll();
 }
 
@@ -58,6 +59,14 @@ public long daysBetween( Long jackpotId) {
 	
 	
 	long  days =( jackpot.getDatefin().getTime() - g.getTime())/(1000*60*60*24);
+	
+	
+//	if (days==0)
+//	{
+//		
+//		jackpotrepository.deleteById(jackpotId);
+//		System.out.println("jackpot end");
+//	}
 	return days;
 	
 }

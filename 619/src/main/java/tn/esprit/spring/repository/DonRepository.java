@@ -28,12 +28,12 @@ public interface DonRepository extends JpaRepository <Don,Long> {
 	 
 	 
 	 
-	 @Query(value = "SELECT count(montantdon`) from Don Order By  user_Id ", nativeQuery = true)
+	 @Query(value = "SELECT count(montantdon`) from Don Order By  user_id ", nativeQuery = true)
  	 
 	    int countByUserID();	
+	 @Query(value = "SELECT SUM(montantdon) from Don where jackpot_id=3  ", nativeQuery = true)
 	 
-	 
-	 
+	 float countDonByjackpot(@Param("idDon") Long idDon,@Param("jackpotId") Long jackpotId );
 	 
 //	 @Query(value = "select  do.category_name from category ca "
 //				+ " inner join product p on p.category_id = ca.id  "
