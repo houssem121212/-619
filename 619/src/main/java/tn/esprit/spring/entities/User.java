@@ -24,6 +24,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.NaturalId;
+import org.springframework.beans.factory.annotation.Value;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -43,6 +44,9 @@ public class User  {
     private Long id;
 
 
+
+    @Value("${some.key:true}")
+    private boolean availibility;
     
     private int salary;
     @NotBlank
@@ -128,6 +132,8 @@ public class User  {
         this.roles = roles;
     }
     
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  	private List<Ticket> Tickets;
     
     @OneToMany(mappedBy="user")
   	private List<Command> Commands;
@@ -178,6 +184,14 @@ public class User  {
 
 	
 
+	public boolean isAvailibility() {
+		return availibility;
+	}
+
+	public void setAvailibility(boolean availibility) {
+		this.availibility = availibility;
+	}
+
 	public int getSalary() {
 		return salary;
 	}
@@ -207,6 +221,16 @@ public class User  {
 		this.cart = cart;
 		this.ads = ads;
 		
+	}
+
+	
+	
+	public List<Ticket> getTickets() {
+		return Tickets;
+	}
+
+	public void setTickets(List<Ticket> tickets) {
+		Tickets = tickets;
 	}
 
 	public List<Command> getCommands() {
@@ -354,6 +378,35 @@ public class User  {
 		this.replies = replies;
 	}
 
+	public User(Long id, boolean availibility, int salary, @NotBlank @Size(max = 40) String name,
+			@NotBlank @Size(max = 15) String username, @NotBlank @Size(max = 40) @Email String email,
+			@NotBlank @Size(max = 100) String password, Set<Role> roles, List<Ticket> tickets, List<Command> commands,
+			List<Delivery> deliverys, List<Don> dons, Aisle aisle, List<Event> events, Stock stocks, Cart cart, Ads ads,
+			List<Comment> comments, List<Topic> topics, List<Reply> replies) {
+		super();
+		this.id = id;
+		this.availibility = availibility;
+		this.salary = salary;
+		this.name = name;
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.roles = roles;
+		Tickets = tickets;
+		Commands = commands;
+		this.deliverys = deliverys;
+		this.dons = dons;
+		this.aisle = aisle;
+		this.events = events;
+		this.stocks = stocks;
+		this.cart = cart;
+		this.ads = ads;
+		this.comments = comments;
+		this.topics = topics;
+		this.replies = replies;
+	}
+
+	
 
 	}
 

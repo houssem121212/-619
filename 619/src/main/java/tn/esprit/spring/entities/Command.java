@@ -41,6 +41,9 @@ public class Command implements Serializable {
 
 	@Column
 	private String commandType;
+	
+	@Column
+	private String typeDelivery;
 
 	@Column
 	private float prix;
@@ -103,6 +106,17 @@ public class Command implements Serializable {
 
 	public void setCommandType(String commandType) {
 		this.commandType = commandType;
+	}
+
+	
+
+	public String getTypeDelivery() {
+		return typeDelivery;
+	}
+
+
+	public void setTypeDelivery(String typeDelivery) {
+		this.typeDelivery = typeDelivery;
 	}
 
 
@@ -237,6 +251,26 @@ public class Command implements Serializable {
 	}
 
 
+	public Command(Long id, int numeroCommand, String commandType, String typeDelivery, float prix,
+			LocalDate commandDate, String commandAdresse, Boolean commandEtat, List<Product> produits, Facture facture,
+			User user, Delivery delvey, Don don) {
+		super();
+		this.id = id;
+		this.numeroCommand = numeroCommand;
+		this.commandType = commandType;
+		this.typeDelivery = typeDelivery;
+		this.prix = prix;
+		this.commandDate = commandDate;
+		this.commandAdresse = commandAdresse;
+		this.commandEtat = commandEtat;
+		this.produits = produits;
+		this.facture = facture;
+		this.user = user;
+		this.delvey = delvey;
+		this.don = don;
+	}
+
+
 	public Command() {
 		super();
 	}
@@ -244,18 +278,15 @@ public class Command implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Command [id=" + id + ", numeroCommand=" + numeroCommand + ", commandType=" + commandType + ", prix="
-				+ prix + ", commandDate=" + commandDate + ", commandAdresse=" + commandAdresse + ", commandEtat="
-				+ commandEtat + "]";
+		return "Command [id=" + id + ", numeroCommand=" + numeroCommand + ", commandType=" + commandType
+				+ ", typeDelivery=" + typeDelivery + ", prix=" + prix + ", commandDate=" + commandDate
+				+ ", commandAdresse=" + commandAdresse + ", commandEtat=" + commandEtat + "]";
 	}
-
-
-
 	
 
-	
 
-	
+
 	
 	
 }
+
