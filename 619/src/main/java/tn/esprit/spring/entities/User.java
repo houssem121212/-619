@@ -25,6 +25,8 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.NaturalId;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name = "users", uniqueConstraints = {
@@ -277,16 +279,27 @@ public class User  {
     
 
 
-	
+	@JsonIgnore
 	@OneToMany( mappedBy="user")
     private List<Comment> comments ;
-
+	@JsonIgnore
     @OneToMany( mappedBy="user")
     private List<Topic> topics ;
-
+	@JsonIgnore
     @OneToMany( mappedBy="user")
     private List<Reply> replies ;
-    
+	/*@OneToMany(mappedBy = "ownerId", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	  private List<Room> rooms;
+	
+	@OneToMany(mappedBy = "senderId", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	  private List<Message> messages;*/
+	@OneToMany(mappedBy = "user")
+  private Set<RatingTopic> ratings = new HashSet<>();
+	
+	
+	public void setRatings(Set<RatingTopic> ratings) {
+		this.ratings = ratings;
+	}
     
 
 	public List<Comment> getComments() {

@@ -4,11 +4,16 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
+//import org.assertj.core.annotations.Nullable;
 
 @Entity
 public class Section implements Serializable{
@@ -16,10 +21,16 @@ public class Section implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id_s; 
+	@NotBlank
+    @Size(min = 3, max = 100)
 	private String name ; 
+	 @Column(columnDefinition = "text")
 	private String description ;
+	// @Nullable 
 	private String image_s ;
 	
+
+	//@Nullable
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="section")
     private List<Topic> topics ;
 	
@@ -53,24 +64,27 @@ public class Section implements Serializable{
 	public void setTopics(List<Topic> topics) {
 		this.topics = topics;
 	}
-	public Section(Long id_s, String name, String description, String image_s, List<Topic> topics) {
+	
+	public Section(Long id_s, @NotBlank @Size(min = 3, max = 100) String name, String description, String image_s,
+			 List<Topic> topics) {
 		super();
 		this.id_s = id_s;
 		this.name = name;
 		this.description = description;
 		this.image_s = image_s;
+	
 		this.topics = topics;
 	}
 	public Section() {
 		super();
 	}
-	
 	@Override
 	public String toString() {
 		return "Section [id_s=" + id_s + ", name=" + name + ", description=" + description + ", image_s=" + image_s
-				+ ", topics=" + topics + "]";
+				+  ", topics=" + topics + "]";
 	}
-
+	
+	
 	 
 	
 

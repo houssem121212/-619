@@ -1,6 +1,7 @@
 package tn.esprit.spring.entities;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -13,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity 
 public class Comment implements Serializable  {
@@ -27,12 +30,25 @@ public class Comment implements Serializable  {
 	private Long replyCount ;
 	private String image ;
 	
-	@Temporal(TemporalType.DATE) 
-	private Date creationDate;
+	//@Temporal(TemporalType.DATE) 
+	private LocalDate creationDate;
 	
+	
+	@JsonIgnore
 	@ManyToOne
 	User user ;
 	
+	private String username;
+	
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	@JsonIgnore
 	@ManyToOne
 	Topic topic ;
 
@@ -80,11 +96,11 @@ public class Comment implements Serializable  {
 		this.image = image;
 	}
 
-	public Date getCreationDate() {
+	public LocalDate getCreationDate() {
 		return creationDate;
 	}
 
-	public void setCreationDate(Date creationDate) {
+	public void setCreationDate(LocalDate creationDate) {
 		this.creationDate = creationDate;
 	}
 	
@@ -113,8 +129,8 @@ public class Comment implements Serializable  {
 		this.replies = replies;
 	}
 
-	public Comment(Long id_c, String content_c, boolean useful, Long replyCount, String image, Date creationDate,
-			User user, Topic topic, List<Reply> replies) {
+	public Comment(Long id_c, String content_c, boolean useful, Long replyCount, String image, LocalDate creationDate,
+			User user, Topic topic, List<Reply> replies,String username) {
 		super();
 		this.id_c = id_c;
 		this.content_c = content_c;
@@ -125,6 +141,12 @@ public class Comment implements Serializable  {
 		this.user = user;
 		this.topic = topic;
 		this.replies = replies;
+		this.username=username; 
+	}
+
+	public Comment(Topic topic) {
+		super();
+		this.topic = topic;
 	}
 
 	public Comment() {
@@ -134,9 +156,11 @@ public class Comment implements Serializable  {
 	@Override
 	public String toString() {
 		return "Comment [id_c=" + id_c + ", content_c=" + content_c + ", useful=" + useful + ", replyCount="
-				+ replyCount + ", image=" + image + ", creationDate=" + creationDate + ", user=" + user + ", topic="
-				+ topic + ", replies=" + replies + "]";
+				+ replyCount + ", image=" + image + ", creationDate=" + creationDate + ", user=" + user + ", username="
+				+ username + ", topic=" + topic + ", replies=" + replies + "]";
 	}
+
+	
 
 	
 	

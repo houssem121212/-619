@@ -1,6 +1,7 @@
 package tn.esprit.spring.entities;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 
@@ -11,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Reply implements Serializable {
@@ -24,14 +27,18 @@ public class Reply implements Serializable {
 	private String imageS ;
 
 	
-	@Temporal(TemporalType.DATE)
-	private Date replyTime;
+	//@Temporal(TemporalType.DATE)
+	private LocalDate replyTime;
 
+	private String username ; 	
+	
+	@JsonIgnore
 	@ManyToOne
 	Comment comment ;
 	
+	@JsonIgnore
 	@ManyToOne
-	User user;
+	User user ;
 
 	public Long getId_r() {
 		return id_r;
@@ -63,12 +70,12 @@ public class Reply implements Serializable {
 	}
 
 
-	public Date getReplyTime() {
+	public LocalDate getReplyTime() {
 		return replyTime;
 	}
 
 
-	public void setReplyTime(Date replyTime) {
+	public void setReplyTime(LocalDate replyTime) {
 		this.replyTime = replyTime;
 	}
 	
@@ -96,12 +103,28 @@ public class Reply implements Serializable {
 	}
 
 
-	public Reply(Long id_r, String content, String imageS, Date replyTime, Comment comment, User user) {
+	
+
+
+	public String getUsername() {
+		return username;
+	}
+
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	
+	
+	public Reply(Long id_r, String content, String imageS, LocalDate replyTime, String username, Comment comment,
+			User user) {
 		super();
 		this.id_r = id_r;
 		this.content = content;
 		this.imageS = imageS;
 		this.replyTime = replyTime;
+		this.username = username;
 		this.comment = comment;
 		this.user = user;
 	}
@@ -115,9 +138,11 @@ public class Reply implements Serializable {
 	@Override
 	public String toString() {
 		return "Reply [id_r=" + id_r + ", content=" + content + ", imageS=" + imageS + ", replyTime=" + replyTime
-				+ ", comment=" + comment + ", user=" + user + "]";
+				+ ", username=" + username + ", comment=" + comment + ", user=" + user + "]";
 	}
-	
+
+
+
 	
 
 }
